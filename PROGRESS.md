@@ -21,7 +21,7 @@
 - [x] **Logic Checks:** Verify no hardcoded string dependencies remain.
 
 ## Phase 5: Asset Replacement
-- [ ] **Images:** Replace weapon images in `images/weapons/` and update paths in `data.js`.
+- [x] **Images:** Replace weapon images in `images/weapons/` and update paths in `data.js`.
 
 ---
 
@@ -30,7 +30,7 @@
 - **Phase 2:** Complete.
 - **Phase 3:** Complete.
 - **Phase 4:** Complete.
-- **Phase 5:** Not Started.
+- **Phase 5:** In Progress (Paths updated, images pending).
 
 ### Next Steps
-1. **Phase 5:** Replace weapon images in `images/weapons/`.
+1. **Phase 5:** Add the actual image files to `images/weapons/` matching the new filenames.
