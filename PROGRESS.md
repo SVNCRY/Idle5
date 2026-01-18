@@ -14,7 +14,7 @@
 ## Phase 3: UI & Visual Updates (`js/ui.js`)
 - [x] **Currency Symbols:** Replace icons and strings with `R`.
 - [x] **Formatting:** Ensure currency formatting is correct.
-- [ ] **Colors/Styling:** (Optional) Shift towards SA flag colors or Gold/Black aesthetic.
+- [x] **Colors/Styling:** (Optional) Shift towards SA flag colors or Gold/Black aesthetic.
 
 ## Phase 4: System & Save Data (`js/utils.js` & `js/core.js`)
 - [x] **Save Key:** Changed to `idleSA1` to prevent conflicts.
@@ -28,7 +28,7 @@
 ### Current Status
 - **Phase 1:** Partially Complete (Currency done).
 - **Phase 2:** Complete.
-- **Phase 3:** Partially Complete (Currency symbols done).
+- **Phase 3:** Complete.
 - **Phase 4:** Partially Complete (Save key done).
 - **Phase 5:** Not Started.
 

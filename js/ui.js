@@ -1,4 +1,4 @@
-﻿﻿function UpdateUI() {
+﻿﻿﻿function UpdateUI() {
 	let ClicCashText = fix(p.Weapon.Power * (GetWeaponMult(p.Weapon.Id) + ((p.prestige.bonus + p.prestige.multipliers[1]) * 0.1) - 0.1), "full");
 	let WeaponsNBR = 0;
 	let AllWeaponsNBR = -1;
@@ -40,13 +40,13 @@
 	$("#totalweaponsbought").html("Total weapons bought: <font class='jaune'>" + p.stats.totalweaponsbought + "</font>");
 	$("#totalweaponrerolled").html("Total weapon rerolled: <font class='jaune'>" + p.stats.totalweaponrerolled + "</font>");
 	//CASH STATS
-	$("#cashcount").html("<span class='desc tc-dollar'>R " + fix(p.cash, "full") + "</span> " + texts.stats[6]);
-	$("#cashpscount").html("<span class='desc tc-dollar'>R " + fix(getCashPS(), "full") + "</span> " + texts.stats[7]);
-	$("#addcashcount").html("<span class='desc tc-dollar'>R " + ClicCashText + "</span> " + texts.stats[8]);
+	$("#cashcount").html("<span class='desc jaune'>R " + fix(p.cash, "full") + "</span> " + texts.stats[6]);
+	$("#cashpscount").html("<span class='desc jaune'>R " + fix(getCashPS(), "full") + "</span> " + texts.stats[7]);
+	$("#addcashcount").html("<span class='desc jaune'>R " + ClicCashText + "</span> " + texts.stats[8]);
 	$("#character_totalspentcash").html("<span class='desc tc-spent-dollar'>R " + fix(p.stats.character_totalspentcash, "full") + "</span> spent with character");
-	$("#character_totalcash").html("<span class='desc tc-dollar'>R " + fix(p.stats.character_totalcash, "full") + "</span> earned with character");
+	$("#character_totalcash").html("<span class='desc jaune'>R " + fix(p.stats.character_totalcash, "full") + "</span> earned with character");
 	$("#totalspentcash").html("<span class='desc tc-spent-dollar'>R " + fix(p.stats.totalspentcash, "full") + "</span> spent in total");
-	$("#totalcash").html("<span class='desc tc-dollar'>R " + fix(p.stats.totalcash, "full") + "</span> earned in total");
+	$("#totalcash").html("<span class='desc jaune'>R " + fix(p.stats.totalcash, "full") + "</span> earned in total");
 	//MULTIPLIERS STATS
 	$("#prestigemult").html("Prestige multiplier at <font class='jaune bold'>" + fix(p.prestige.bonus, 9) + "</font>");
 	$("#cashmult").html("Cash (stamina) multiplier at <font class='jaune bold'>" + fix((p.prestige.bonus + (p.prestige.multipliers[0] * 0.1)), 9) + "</font>");
@@ -59,7 +59,7 @@
 	$("#objective").html(GetQuestTitle());
 	$("#quest_rewards").html("<i class='fa-light fa-coin'></i> " + fix(p.quest.reward + p.quest.reward * (p.prestige.multipliers[2] * 0.1), "dynamic"));
 
-	if (p.points >= 0.5) $("#ChangeObjective").attr("class", "fluid ui inverted green dollar button");
+	if (p.points >= 0.5) $("#ChangeObjective").attr("class", "fluid ui inverted yellow button");
 	else $("#ChangeObjective").attr("class", "fluid ui inverted basic red button");
 
 	$("#successcount").html("<font class='SuccessText'>" + SuccessCount() + "</font>/" + success.length + " " + texts.success[0]);
@@ -113,15 +113,15 @@ function MissionList() {
 	$('#missions').append("<tbody />");
 	for (var i in missions) {
 		let CONTENT = $(`
-			<tr id='mission-${i}'><td class='single line ui center aligned type2'>${missions[i].name}</td>
+			<tr id='mission-${i}'><td class='single line ui center aligned type2 jaune'>${missions[i].name}</td>
 			<td id='mission-${i}-level' class='single line ui center aligned'>0</td>
 			<td id='mission-${i}-value' class='single line ui center aligned'>0</td>
 			<td id='mission-${i}-production' class='ui center aligned'>0</td>
 			<td class='ui center aligned'>
 			<div class='ui buttons'>
-			<button id='mission-${i}-btnB1' class='ui green dollar button' onClick='BuyM(${i}, 1);'>Buy 1</button>
-			<button id='mission-${i}-btnB10' class='ui green dollar button' onClick='BuyM(${i}, 10);'>10</button>"+
-			<button id='mission-${i}-btnB100' class='ui green dollar button' onClick='BuyM(${i}, 100);'>100</button>
+			<button id='mission-${i}-btnB1' class='ui yellow button' onClick='BuyM(${i}, 1);'>Buy 1</button>
+			<button id='mission-${i}-btnB10' class='ui yellow button' onClick='BuyM(${i}, 10);'>10</button>"+
+			<button id='mission-${i}-btnB100' class='ui yellow button' onClick='BuyM(${i}, 100);'>100</button>
 			</div><br />
 			<div class='ui buttons'>
 			<button id='mission-${i}-btnS1' class='ui negative button' onClick='SellM(${i}, 1);'>Sell 1</button>
@@ -147,11 +147,11 @@ function UpdateMissionsDiv(i) {
 	$("#mission-" + i).attr("class", p.missions[i] < 1 ? '' : 'item-active');
 	$("#mission-" + i + "-level").html(p.missions[i]);
 	$("#mission-" + i + "-value").html("R " + fix(GetMissionPrice(i, 1), 1));
-	$("#mission-" + i + "-production").attr("class", "ui center aligned tc-dollar " + (p.missions[i] < 1 ? '' : 'bold'));
+	$("#mission-" + i + "-production").attr("class", "ui center aligned jaune " + (p.missions[i] < 1 ? '' : 'bold'));
 	$("#mission-" + i + "-production").html("R " + fix((missions[i].value * p.missions[i]) * (p.prestige.bonus + (p.prestige.multipliers[0] * 0.1)), 1) + texts.missions[5]);
-	$("#mission-" + i + "-btnB1").attr("class", "ui green dollar button " + (GetMissionPrice(i, 1) > p.cash ? ' disabled' : ''));
-	$("#mission-" + i + "-btnB10").attr("class", "ui green dollar button " + (GetMissionPrice(i, 10) > p.cash ? ' disabled' : ''));
-	$("#mission-" + i + "-btnB100").attr("class", "ui green dollar button " + (GetMissionPrice(i, 100) > p.cash ? ' disabled' : ''));
+	$("#mission-" + i + "-btnB1").attr("class", "ui yellow button " + (GetMissionPrice(i, 1) > p.cash ? ' disabled' : ''));
+	$("#mission-" + i + "-btnB10").attr("class", "ui yellow button " + (GetMissionPrice(i, 10) > p.cash ? ' disabled' : ''));
+	$("#mission-" + i + "-btnB100").attr("class", "ui yellow button " + (GetMissionPrice(i, 100) > p.cash ? ' disabled' : ''));
 	$("#mission-" + i + "-btnS1").attr("class", "ui red button " + (p.missions[i] < 1 ? 'disabled' : ''));
 	$("#mission-" + i + "-btnS10").attr("class", "ui red button " + (p.missions[i] < 10 ? 'disabled' : ''));
 	$("#mission-" + i + "-btnS100").attr("class", "ui red button " + (p.missions[i] < 100 ? 'disabled' : ''));
@@ -193,13 +193,13 @@ function UpdateWeapons() {
 		let COST = p.WeaponBought[i] < 1 ? fix(weapons[i].price, 1) : fix(weapons[i].price * 1.25, 1);
 		let PURCHASED = p.WeaponBought[i] > 0 ? 'blanc' : 'rouge';
 		let PURCHASED_TEXT = p.WeaponBought[i] > 0 ? "" : `<span class="ui move left ${PURCHASED}"><i class="fa-solid fa-lock-keyhole"></i></span>`;
-		let ENABLE_BTN = weapons[i].price > p.cash ? 'basic red' : 'green';
+		let ENABLE_BTN = weapons[i].price > p.cash ? 'basic red' : 'yellow';
 		let PURCHASE_TEXT = p.WeaponBought[i] > 0 ? "<div class='hidden content'>R " + COST + "</div><div class='visible content'>Roll stats</div>" : "Purchase";
 		let PURCHASE_BTN = p.WeaponBought[i] > 0 ? "fluid ui vertical animated button" : "fluid ui button";
 		let EQUIP_BTN = p.WeaponBought[i] < 1 ? " disabled" : "";
 		let EQUIP_TEXT = "Equip";
 		if (ENABLED === 'item-active' && p.Weapon.Id == i) { ENABLED = 'item-equipped'; EQUIP_BTN = " inverted basic"; EQUIP_TEXT = "Equipped"; }
-		if (p.Stars[i] === 10 && p.WeaponBought[i] > 0) { PURCHASE_TEXT = "Maxed"; PURCHASE_BTN = "fluid ui button disabled"; ENABLE_BTN = "basic green"; }
+		if (p.Stars[i] === 10 && p.WeaponBought[i] > 0) { PURCHASE_TEXT = "Maxed"; PURCHASE_BTN = "fluid ui button disabled"; ENABLE_BTN = "basic yellow"; }
 		$("#weapon-" + i).attr("class", "ui center aligned " + ENABLED);
 		$("#weapon-" + i + "-name").html(`${PURCHASED_TEXT}${GenStarLabel(p.Stars[i])} <font class="${getQuality(p.Stars[i])}">${weapons[i].name}</font> </br><i class="fa-thin fa-crosshairs-simple rouge"></i> ${fix(weapons[i].power * (GetWeaponMult(i) + ((p.prestige.bonus + p.prestige.multipliers[1]) * 0.1) - 0.1), 1)}`);
 		$("#weapon-" + i + "-price").attr("class", "ui center aligned " + CANBUY);
@@ -219,7 +219,7 @@ function VehicleList() {
 	for (var i in vehicules) {
 		let vehicle = vehicules[i];
 		let PRICE = GetMultPrice(i);
-		let canBuy = PRICE > p.points ? ' basic red' : ' green dollar';
+		let canBuy = PRICE > p.points ? ' basic red' : ' yellow';
 		let BUTTON = "<button class='fluid ui button" + canBuy + "' onClick='buyV(" + i + ");'>Upgrade</button>";
 		let type = "";
 		let level = 0;
@@ -262,7 +262,7 @@ function ClickEvents() {
 	$("#game-menu").on("click", "a", function () {
 		var id = $(this).data('id'); hideTabs();
 		$("#tab" + id).show();
-		$("#t" + id).addClass("green dollar basic");
+		$("#t" + id).addClass("yellow basic");
 		UpdateUI();
 		UpdateTabs();
 	});
