@@ -104,7 +104,7 @@ function UpdateTexts() {
 	$("#CloseStats").html(texts.stats[5]);
 	$("#statistics").html(texts.stats[1]);
 	$("#version").html(texts.stats[12] + " " + version);
-	document.title = "idleFive " + version;
+	document.title = "Mzansi Crime Idle " + version;
 }
 
 //MISSIONS TABLE

@@ -1,4 +1,4 @@
-const version = "v5.85";
+const version = "v1.0-SA";
 var notify_time = 0;
 const DEFAULT = {
 	//DEFAULT VARS

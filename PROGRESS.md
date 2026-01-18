@@ -2,8 +2,8 @@
 
 ## Phase 1: Conceptual Design & Terminology
 - [x] **Currency:** Change `$` to `R` (Rand).
-- [ ] **Slang:** Incorporate SA slang (bra, china, tsotsi, gatas).
-- [ ] **Narrative:** Rewrite tutorial for SA setting (Township/Joburg CBD to start).
+- [x] **Slang:** Incorporate SA slang (bra, china, tsotsi, gatas).
+- [x] **Narrative:** Rewrite tutorial for SA setting (Township/Joburg CBD to start).
 
 ## Phase 2: Data Overhaul (`js/data.js`)
 - [x] **Missions:** Rename GTA V heists to SA equivalents (e.g., CIT Heist, Taxi Wars).
@@ -18,7 +18,7 @@
 
 ## Phase 4: System & Save Data (`js/utils.js` & `js/core.js`)
 - [x] **Save Key:** Changed to `idleSA1` to prevent conflicts.
-- [ ] **Logic Checks:** Verify no hardcoded string dependencies remain.
+- [x] **Logic Checks:** Verify no hardcoded string dependencies remain.
 
 ## Phase 5: Asset Replacement
 - [ ] **Images:** Replace weapon images in `images/weapons/` and update paths in `data.js`.
@@ -26,13 +26,11 @@
 ---
 
 ### Current Status
-- **Phase 1:** Partially Complete (Currency done).
+- **Phase 1:** Complete.
 - **Phase 2:** Complete.
 - **Phase 3:** Complete.
-- **Phase 4:** Partially Complete (Save key done).
+- **Phase 4:** Complete.
 - **Phase 5:** Not Started.
 
 ### Next Steps
-1. Rename Missions in `js/data.js`.
-2. Rename Weapons in `js/data.js`.
-3. Update Achievements and Text in `js/data.js`.
+1. **Phase 5:** Replace weapon images in `images/weapons/`.
