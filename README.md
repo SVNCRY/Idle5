@@ -52,4 +52,4 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ---
 
-*Forked from IdleFive, adapted for the South African context.*
+*Forked from [IdleFive](https://github.com/GoldenLys/IdleFive), adapted for the South African context.*
