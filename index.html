@@ -14,6 +14,21 @@
     <link rel="preconnect" href="https://site-assets.fontawesome.com" crossorigin>
     <link rel="stylesheet" type="text/css" href="https://site-assets.fontawesome.com/releases/v7.1.0/css/all.css">
     <link rel="stylesheet" type="text/css" href="style.css" />
+    <style>
+        /* Mobile Bottom Nav */
+        #mobile-bottom-nav { display: none; position: fixed; bottom: 0; left: 0; width: 100%; z-index: 1000; border-radius: 0; margin: 0; }
+        @media only screen and (max-width: 767px) {
+            #mobile-bottom-nav { display: flex; }
+            #game-menu { display: none !important; }
+            .ui.stackable.grid { margin-bottom: 60px !important; }
+            .ui.container.main-content { padding-bottom: 70px; }
+        }
+        /* Card adjustments */
+        .ui.cards > .card { width: 100%; background: #1b1c1d !important; box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5; }
+        .ui.cards > .card > .content { color: rgba(255,255,255,.9); }
+        .ui.cards > .card > .content > .header { color: rgba(255,255,255,.9); }
+        .ui.cards > .card > .content > .description { color: rgba(255,255,255,.7); }
+    </style>
 </head>
 
 <body id="body" class="noselect">
@@ -57,9 +72,18 @@
                     <i class="fa-sharp fa-solid fa-award icon"></i>Achievements</a>
             </div>
         </div>
+        <!-- MOBILE BOTTOM NAV -->
+        <div id="mobile-bottom-nav" class="ui inverted labeled icon five item menu">
+            <a class="item" data-id="1"><i class="fa-thin fa-crosshairs-simple icon"></i>Weapons</a>
+            <a class="item active green" data-id="2"><i class="dollar sign icon"></i>Missions</a>
+            <a class="item" data-id="3"><i class="user icon"></i>Char</a>
+            <a class="item" data-id="4"><i class="chart bar icon"></i>Stats</a>
+            <a class="item" data-id="0"><i class="bars icon"></i>Menu</a>
+        </div>
+
         <div class="topmenu-space"></div>
         <!--COLUMNS-->
-        <div class="ui two column very relaxed grid" style="height: 94%; position: relative;">
+        <div class="ui two column stackable very relaxed grid" style="height: 94%; position: relative;">
             <!--LEFT COLUMN-->
             <div class="column" id="colonne-m">
                 <!--CURRENT WEAPON-->
@@ -163,19 +187,19 @@
                         <div id="W8" class="item" data-id="8"></div>
                     </div>
 
-                    <table id="Wtab1" class="ui inverted table"></table>
-                    <table id="Wtab2" class="ui inverted table" style="display: none;"></table>
-                    <table id="Wtab3" class="ui inverted table" style="display: none;"></table>
-                    <table id="Wtab4" class="ui inverted table" style="display: none;"></table>
-                    <table id="Wtab5" class="ui inverted table" style="display: none;"></table>
-                    <table id="Wtab6" class="ui inverted table" style="display: none;"></table>
-                    <table id="Wtab7" class="ui inverted table" style="display: none;"></table>
-                    <table id="Wtab8" class="ui inverted table" style="display: none;"></table>
+                    <div id="Wtab1" class="ui stackable cards"></div>
+                    <div id="Wtab2" class="ui stackable cards" style="display: none;"></div>
+                    <div id="Wtab3" class="ui stackable cards" style="display: none;"></div>
+                    <div id="Wtab4" class="ui stackable cards" style="display: none;"></div>
+                    <div id="Wtab5" class="ui stackable cards" style="display: none;"></div>
+                    <div id="Wtab6" class="ui stackable cards" style="display: none;"></div>
+                    <div id="Wtab7" class="ui stackable cards" style="display: none;"></div>
+                    <div id="Wtab8" class="ui stackable cards" style="display: none;"></div>
                 </div>
 
                 <!--MISSIONS-->
                 <div id="tab2" style="display: block; width: 100%;">
-                    <table id="missions" class="ui inverted table"></table>
+                    <div id="missions" class="ui stackable cards"></div>
                 </div>
 
                 <!--VEHICLES-->

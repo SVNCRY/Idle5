@@ -17,6 +17,8 @@ This document outlines the planned update schedule, transitioning the game from 
   - [ ] Adjust `cost_scale` in `js/data.js` to smooth the Mid-game to Late-game transition.
 - **UI Polish:**
   - [ ] Refactor CSS for better mobile responsiveness.
+  - [ ] **Redesign:** Evaluate options in `UI_REDESIGN_OPTIONS.md`.
+  - [ ] **Implementation:** Convert Mission/Weapon lists from Tables to Cards (Option 1).
   - [ ] Prepare the interface (tabs/layout) for the upcoming Map tab.
 
 ### v1.2: The Provincial Tour (World Expansion Part 1)
