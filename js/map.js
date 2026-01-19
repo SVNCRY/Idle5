@@ -1,7 +1,7 @@
 // Map Logic for Mzansi Crime Idle
 // Handles region unlocking and progression based on MAP.md
 
-var regions = {
+const regions = {
     0: { id: 0, name: "Gauteng", subtitle: "The Concrete Jungle", focus: "Violent Crime & Fraud", reqRank: 0, phase: 1 },
     1: { id: 1, name: "Mpumalanga", subtitle: "The Powerhouse", focus: "Energy & Coal", reqRank: 50, phase: 1 },
     2: { id: 2, name: "Limpopo", subtitle: "The Gateway", focus: "Smuggling & Wildlife", reqRank: 150, phase: 1 },
@@ -32,8 +32,8 @@ function isRegionUnlocked(regionId) {
  * @returns {Array}
  */
 function getUnlockedRegions() {
-    var unlocked = [];
-    for (var key in regions) {
+    const unlocked = [];
+    for (const key in regions) {
         if (isRegionUnlocked(key)) {
             unlocked.push(regions[key]);
         }
@@ -46,7 +46,7 @@ function getUnlockedRegions() {
  * @returns {Object|null}
  */
 function getNextRegionToUnlock() {
-    for (var key in regions) {
+    for (const key in regions) {
         if (!isRegionUnlocked(key)) {
             return regions[key];
         }
@@ -63,8 +63,8 @@ function getRegionUnlockProgress(regionId) {
     if (isRegionUnlocked(regionId)) return 100;
     if (typeof p === 'undefined') return 0;
 
-    var currentReq = regions[regionId].reqRank;
-    var prevReq = 0;
+    const currentReq = regions[regionId].reqRank;
+    let prevReq = 0;
     
     // Find the requirement of the previous region to calculate relative progress
     if (regionId > 0) {
@@ -73,6 +73,6 @@ function getRegionUnlockProgress(regionId) {
 
     if (currentReq <= prevReq) return 100; // Avoid division by zero
 
-    var progress = ((p.rank - prevReq) / (currentReq - prevReq)) * 100;
+    const progress = ((p.rank - prevReq) / (currentReq - prevReq)) * 100;
     return Math.max(0, Math.min(100, progress));
 }

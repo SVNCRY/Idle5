@@ -93,6 +93,7 @@ function fix(number_raw, type) {
 	if (type == 10) return numeral(numStr).format("0.0%");
 
 	if (type == "dynamic") {
+		let VALUE;
 		if (number_raw != Math.round(number_raw)) VALUE = numeral(number_raw).format("0,0.0");
 		else VALUE = numeral(number_raw).format("0,0");
 		return VALUE;

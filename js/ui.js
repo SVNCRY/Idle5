@@ -1,10 +1,10 @@
 ﻿﻿function UpdateUI() {
-	let ClicCashText = fix(p.Weapon.Power * (GetWeaponMult(p.Weapon.Id) + ((p.prestige.bonus + p.prestige.multipliers[1]) * 0.1) - 0.1), "full");
+	const ClicCashText = fix(p.Weapon.Power * (GetWeaponMult(p.Weapon.Id) + ((p.prestige.bonus + p.prestige.multipliers[1]) * 0.1) - 0.1), "full");
 	let WeaponsNBR = 0;
 	let AllWeaponsNBR = -1;
-	for (let i in weapons) { AllWeaponsNBR += 1; WeaponsNBR += p.WeaponBought[i]; }
-	let PrestigePoints = p.rank < 400 ? 0 : Math.trunc(p.rank / 200);
-	let prestigeText = p.prestige.price[0] <= p.rank && p.prestige.price[1] <= p.cash ? texts.infos[0] : "";
+	for (const i in weapons) { AllWeaponsNBR += 1; WeaponsNBR += p.WeaponBought[i]; }
+	const PrestigePoints = p.rank < 400 ? 0 : Math.trunc(p.rank / 200);
+	const prestigeText = p.prestige.price[0] <= p.rank && p.prestige.price[1] <= p.cash ? texts.infos[0] : "";
 	//LEFT INFOS
 	$('#imagecash').attr('style', "background-image:url('" + weapons[p.Weapon.Id].img + "');");
 	//$("#status_cps").html(""); unused for now
@@ -109,8 +109,8 @@ function UpdateTexts() {
 //MISSIONS TABLE
 function MissionList() {
 	$('#missions').html("");
-	for (let i in missions) {
-		let CONTENT = $(`
+	for (const i in missions) {
+		const CONTENT = $(`
 			<div class="card bg-base-200 shadow-xl" id="mission-${i}">
 				<div class="card-body p-4">
 					<h3 class="card-title text-base">${missions[i].name}</h3>
@@ -145,7 +145,7 @@ function MissionList() {
 
 function UpdateMissions(onlyId) {
 	if (onlyId !== undefined) { var i = onlyId; UpdateMissionsDiv(i); return; }
-	for (var i in missions) {
+	for (const i in missions) {
 		UpdateMissionsDiv(i);
 	}
 }
@@ -156,7 +156,7 @@ function UpdateMissionsDiv(i) {
 	$("#mission-" + i + "-next").html(getNextMilestone(p.missions[i]));
 	$("#mission-" + i + "-value").html("Cost: R " + fix(GetMissionPrice(i, 1), 1));
 	
-	let prodVal = (missions[i].value * p.missions[i]) * (p.prestige.bonus + (p.prestige.multipliers[0] * 0.1));
+	const prodVal = (missions[i].value * p.missions[i]) * (p.prestige.bonus + (p.prestige.multipliers[0] * 0.1));
 	$("#mission-" + i + "-production").html("R " + fix(prodVal, 1) + "/s");
 
 	$("#mission-" + i + "-btnB1").prop("disabled", GetMissionPrice(i, 1) > p.cash);
@@ -181,8 +181,8 @@ function WeaponList() {
 		$('#Wtab' + id).html("");
 	}
 
-	for (let i in weapons) {
-		let CONTENT = $(`
+	for (const i in weapons) {
+		const CONTENT = $(`
             <div class="card bg-base-200 shadow-xl" id="weapon-${i}">
                 <figure class="px-4 pt-4">
                     <img src="${weapons[i].img}" class="rounded-xl h-32 object-contain bg-base-300 w-full" style="background: #333;">
@@ -202,16 +202,16 @@ function WeaponList() {
 }
 
 function UpdateWeapons() {
-	for (let i in weapons) {
-		let COST = p.WeaponBought[i] < 1 ? fix(weapons[i].price, 1) : fix(weapons[i].price * 1.25, 1);
-		let PURCHASED_TEXT = p.WeaponBought[i] > 0 ? "" : `<i class="fa-solid fa-lock-keyhole"></i> `;
+	for (const i in weapons) {
+		const COST = p.WeaponBought[i] < 1 ? fix(weapons[i].price, 1) : fix(weapons[i].price * 1.25, 1);
+		const PURCHASED_TEXT = p.WeaponBought[i] > 0 ? "" : `<i class="fa-solid fa-lock-keyhole"></i> `;
 		
 		$("#weapon-" + i + "-name").html(`${PURCHASED_TEXT}${GenStarLabel(p.Stars[i])} <span class="${getQuality(p.Stars[i])}">${weapons[i].name}</span>`);
 		
-		let powerVal = fix(weapons[i].power * (GetWeaponMult(i) + ((p.prestige.bonus + p.prestige.multipliers[1]) * 0.1) - 0.1), 1);
+		const powerVal = fix(weapons[i].power * (GetWeaponMult(i) + ((p.prestige.bonus + p.prestige.multipliers[1]) * 0.1) - 0.1), 1);
 		$("#weapon-" + i + "-price").html(`R ${COST} <br><small style="color: #db2828;"><i class="fa-thin fa-crosshairs-simple"></i> ${powerVal}</small>`);
 		
-		let canBuy = p.cash >= (p.WeaponBought[i] < 1 ? weapons[i].price : weapons[i].price * 1.25);
+		const canBuy = p.cash >= (p.WeaponBought[i] < 1 ? weapons[i].price : weapons[i].price * 1.25);
 		let purchaseBtnClass = canBuy ? "btn btn-sm btn-warning w-full" : "btn btn-sm btn-error btn-outline w-full btn-disabled";
 		if (p.Stars[i] === 10 && p.WeaponBought[i] > 0) purchaseBtnClass = "btn btn-sm btn-warning btn-outline w-full btn-disabled";
 		let purchaseText = p.WeaponBought[i] > 0 ? "Roll" : "Buy";
@@ -235,17 +235,17 @@ function UpdateWeapons() {
 function VehicleList() {
 	let content = "<thead><tr><th class='text-center'>Skill</th><th class='text-center'>Level</th><th class='text-center'>Price</th><th class='text-center'>Bonus</th><th class='text-center'>Action</th></tr></thead><tbody>";
 	
-	for (let i in vehicules) {
-		let vehicle = vehicules[i];
-		let PRICE = GetMultPrice(i);
-		let canBuy = PRICE > p.points ? ' btn-error btn-outline' : ' btn-warning';
+	for (const i in vehicules) {
+		const vehicle = vehicules[i];
+		const PRICE = GetMultPrice(i);
+		const canBuy = PRICE > p.points ? ' btn-error btn-outline' : ' btn-warning';
 		let BUTTON = "<button class='btn btn-sm w-full" + canBuy + "' onClick='buyV(" + i + ");'>Upgrade</button>";
 		let type = "";
 		let level = 0;
-		let name = "<font class='text type2'>";
-		let multiplier = "<font class='jaune'>" + fix((p.prestige.bonus + (p.prestige.multipliers[i] * vehicle.value)), 9) + "</font>";
-		let color = vehicle.price > p.points ? ' rouge bold' : ' jaune bold';
-		let cost = "<font class='" + color + "'><i class='fa-light fa-coin'></i> " + fix(PRICE, "dynamic") + "</font>";
+		const name = "<font class='text type2'>";
+		const multiplier = "<font class='jaune'>" + fix((p.prestige.bonus + (p.prestige.multipliers[i] * vehicle.value)), 9) + "</font>";
+		const color = vehicle.price > p.points ? ' rouge bold' : ' jaune bold';
+		const cost = "<font class='" + color + "'><i class='fa-light fa-coin'></i> " + fix(PRICE, "dynamic") + "</font>";
 		if (vehicle.type == 0) { type = " cash (+10% per level)"; }
 		if (vehicle.type == 1) { type = " damage (+10% per level)"; }
 		if (vehicle.type == 2) { type = " objective reward (+10% per level)"; }
@@ -279,19 +279,19 @@ function hideSTabs() { for (let id = 0; id < 10; id++) { $('#Stab' + id).hide();
 
 function ClickEvents() {
 	$("#game-menu").on("click", "a", function () {
-		let id = $(this).data('id'); hideTabs();
+		const id = $(this).data('id'); hideTabs();
 		$("#tab" + id).show();
 		$("#t" + id).addClass("btn-active text-warning");
 		UpdateUI();
 		UpdateTabs();
 	});
 	$("#sidebar").on("click", "a", function () {
-		let id = $(this).data('id');
+		const id = $(this).data('id');
 		document.getElementById('modal-' + id).showModal();
 		UpdateUI();
 	});
 	$("#mobile-bottom-nav").on("click", "button", function () {
-		let id = $(this).data('id');
+		const id = $(this).data('id');
 		if (id == 0) {
 			$("#sidebar").toggleClass("hidden flex");
 		} else {
@@ -305,7 +305,7 @@ function ClickEvents() {
 		}
 	});
 	$("#weap-select").on("click", "a", function () {
-		let id = $(this).data('id');
+		const id = $(this).data('id');
 		hideWTabs();
 		$('#Wtab' + id).show();
 		$("#W" + id).addClass("tab-active");
@@ -320,7 +320,7 @@ function ClickEvents() {
 		$("#sidebar").toggleClass("hidden flex");
 	});
 	$("#successtype").on("click", "button", function () {
-		let id = $(this).data('id');
+		const id = $(this).data('id');
 		hideSTabs();
 		$('#Stab' + id).show();
 		$("#succcess-btn-" + id).addClass("tab-active");
@@ -336,7 +336,7 @@ function ClickEvents() {
 function SuccessCount() {
 	let succeslevel = 0;
 
-	for (let i in success) {
+	for (const i in success) {
 		const succes = success[i];
 		if (p.succes[i] > 0) { succeslevel++; }
 
@@ -352,7 +352,7 @@ function SuccessCount() {
 function SuccessList() {
 	for (let id = 0; id < 4; id++) { $('#Stab' + id).html(""); }
 
-	for (let i in success) {
+	for (const i in success) {
 		const succes = success[i];
 		const unlocked = p.succes[i] > 0 ? "<i class='fa-solid fa-check text-success'></i>" : "<i class='fa-solid fa-times text-error'></i>";
 
@@ -442,8 +442,8 @@ function getLatestUnlockedMissionId(type) {
 	let latestId = -1;
 	let nextId = -1;
 
-	for (let i in missions) {
-		let id = parseInt(i);
+	for (const i in missions) {
+		const id = parseInt(i);
 		if (p.rank >= missions[id].level) {
 			latestId = id;
 		} else {

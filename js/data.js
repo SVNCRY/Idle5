@@ -1,4 +1,4 @@
-var missions = {
+const missions = {
     // Early-game
     0: { name: 'Smash and Grab', price: 10, value: 0.1, level: 0 },
     1: { name: 'Spaza Shop Robbery', price: 25, value: 0.5, level: 5 },
@@ -35,7 +35,7 @@ var missions = {
     26: { name: 'Guptas Compound Raid',    price: 300000000000, value: 6000000000, level: 2500 },
 };
 
-var weapons = [
+const weapons = [
     // Default weapon
     { name: "Fist", power: 0.5, price: 0, type: 0, img: "images/weapons/melee_fist.webp" },
 
@@ -130,7 +130,7 @@ var weapons = [
     { name: "Railgun",                  power: 1000000000000, price: 7500000000000, type: 8, img: "images/weapons/heavy_railgun.webp" },
 ];
 
-var vehicules = {
+const vehicules = {
     0: { name: 'Stamina', price: 1, value: 0.1, type: 0 },
     1: { name: 'Strength', price: 1, value: 0.1, type: 1 },
     2: { name: 'Stealth', price: 1, value: 0.1, type: 2 },
@@ -139,7 +139,7 @@ var vehicules = {
     //5: { name: 'Luck', price: 1, value: 0.1, type: 5 },
 };
 
-var success = [
+const success = [
     { name: "A fresh start", desc: "Successfully completed the tutorial.", type: 0, },
     //END OF TYPE 0
 
@@ -272,7 +272,7 @@ var success = [
 
 ];
 
-var tutorialtexts = {
+const tutorialtexts = {
     0: { title: "Welcome", text: "Welcome to Mzansi Crime Idle.<br /> Thanks for playing this game.<br /> It is a crime game set in South Africa, but in an idle environment.<br /> Build your empire from the streets to the state.", },
     1: { title: "Objective", text: "The main goal is to buy every weapon and control every hustle in the country.<br /> To do that, you have to get <div class='money'></div> by using your weapons or by doing missions.", },
     2: { title: "How to play ?", text: "Start by clicking on the fist to make some Rands.<br /> After you got some cash, you can buy a weapon or start a mission to gain a lot more <div class='money'></div>.<br /> Buying a Hustle will increase your rank, which you need to change your character.", },
@@ -282,7 +282,7 @@ var tutorialtexts = {
     6: { title: "Skills", text: "Skills increase your cash and damage multipliers.<br /> You need <i class='fa-light fa-coin'></i> Chips to upgrade them.", },
 };
 
-var texts = {
+const texts = {
     sidebar: ["Success", "Statistics", "Guide", "Save", "Donate"],
     menu: ["Menu", "Weapons", "Missions", "Character", "Stats", "Achievements"],
     weapons: ["Weapon", "Price", "Base Damage", "Purchase", "Roll stats", "Equip", "Equipped", "Actions"],

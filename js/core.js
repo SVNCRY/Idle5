@@ -1,5 +1,5 @@
 const version = "v1.1-Beta";
-var notify_time = 0;
+let notify_time = 0;
 const DEFAULT = {
 	//DEFAULT VARS
 	DateStarted: getDate(),
@@ -47,7 +47,7 @@ const DEFAULT = {
 	}
 };
 
-var p = DEFAULT; 
+let p = DEFAULT; 
 
 $(document).ready(function () {
 	if (localStorage.getItem("idleSA1") != null) load();
@@ -73,27 +73,27 @@ function idleFiveLoop() {
 	if (p.stats.character_totalspentcash < 0) p.stats.character_totalspentcash = 0;
 	if (p.cash !== p.cash) p.cash = 0;
 	p.cash = truncate2(p.cash);
-	for (var stat in p.stats) {
+	for (const stat in p.stats) {
 		if (p.stats[stat] !== p.stats[stat]) p.stats[stat] = 0;
 		if (p.stats[stat] < 0) p.stats[stat] = 0;
 	}
-	for (var m in missions) {
+	for (const m in missions) {
 		if (p.missions[m] == null) p.missions[m] = 0;
 	}
-	for (var w in weapons) {
+	for (const w in weapons) {
 		if (p.WeaponBought[w] == null) p.WeaponBought[w] = 0;
 		if (p.Stars[w] == null) p.Stars[w] = 0;
 	}
-	for (var s in success)
+	for (const s in success)
 		if (p.succes[s] == null) p.succes[s] = 0;
-	for (var wtype = 0; wtype < 9; wtype++)
+	for (let wtype = 0; wtype < 9; wtype++)
 		if (p.WeaponType[wtype] == null) p.WeaponType[wtype] = 0;
 
 	//UPDATE VARS
 	p.stats.totalplaytime++;
 	if (p.prestige.level > 1) p.prestige.bonus = 1 + (p.prestige.level * 0.1) - 0.1;
 	let rank = 0;
-	for (var i in p.missions) {
+	for (const i in p.missions) {
 		if (p.missions[i] == null) {
 			p.missions[i] = 0;
 		}
@@ -138,9 +138,9 @@ function getNextMilestone(amountOwned) {
 
 function getCashPS() {
 	let CASHPERSECOND = 0;
-	for (var m in missions) {
+	for (const m in missions) {
 		if (p.missions[m] > 0) {
-			let milestoneBonus = getMilestoneBonus(p.missions[m]);
+			const milestoneBonus = getMilestoneBonus(p.missions[m]);
 			CASHPERSECOND += (missions[m].value * p.missions[m] * milestoneBonus) * (p.prestige.bonus + (p.prestige.multipliers[0] * 0.1));
 		}
 	}
@@ -148,7 +148,7 @@ function getCashPS() {
 }
 
 function ClickWeapon() {
-	let CASH_PER_CLICK = p.Weapon.Power * (GetWeaponMult(p.Weapon.Id) + ((p.prestige.bonus + p.prestige.multipliers[1]) * 0.1) - 0.1);
+	const CASH_PER_CLICK = p.Weapon.Power * (GetWeaponMult(p.Weapon.Id) + ((p.prestige.bonus + p.prestige.multipliers[1]) * 0.1) - 0.1);
 	p.cash += CASH_PER_CLICK;
 	p.stats.totalcash += CASH_PER_CLICK;
 	p.stats.character_totalcash += CASH_PER_CLICK;
@@ -168,7 +168,7 @@ function ClickWeapon() {
 function AddPrestige() {
 	if (p.rank >= p.prestige.price[0]) {
 		if (p.cash >= p.prestige.price[1]) {
-			var r = confirm("Would you like to reset your character to get some bonuses ?");
+			const r = confirm("Would you like to reset your character to get some bonuses ?");
 			if (r == true) {
 				p.points = Math.trunc(p.rank / 200);
 				p.Weapon.Power = 0.5;
@@ -200,7 +200,7 @@ function AddPrestige() {
 function getPrestigePrice() {
 	p.prestige.price[0] = p.prestige.level * 50 + 750;
 	let price = 1e9;
-	for (var Plevel = 1; Plevel < p.prestige.level; Plevel++) {
+	for (let Plevel = 1; Plevel < p.prestige.level; Plevel++) {
 		price += (p.prestige.level * 1e9) * 0.3;
 	}
 	p.prestige.price[1] = price;
@@ -219,7 +219,7 @@ function getRank(rankNBR) {
 }
 
 function buyG(id) {
-	let COST = weapons[id].price;
+	const COST = weapons[id].price;
 
 	if (p.WeaponBought[id] == 1 && p.Stars[id] === 10) return;
 	if (p.cash >= COST) {
@@ -250,7 +250,7 @@ function buyG(id) {
 }
 
 function genGun() {
-	let quality = random(1, 250);
+	const quality = random(1, 250);
 
 	if (quality >= 1) {
 		setQuality(1);
@@ -270,7 +270,7 @@ function genGun() {
 }
 
 function genGun2() {
-	let quality = _.random(1, 1017); // 3-10 Stars
+	const quality = _.random(1, 1017); // 3-10 Stars
 	// 3: 40%  = 1–400
 	// 4: 30%  = 401–700
 	// 5: 15%  = 701–850
@@ -280,7 +280,7 @@ function genGun2() {
 	// 9: .5%% = 1011–1015
 	// 10: .2% = 1016–1017
 
-	let qualityMap = [
+	const qualityMap = [
 		{ min: 1, max: 400, quality: 3 },
 		{ min: 401, max: 700, quality: 4 },
 		{ min: 701, max: 850, quality: 5 },
@@ -356,7 +356,7 @@ function useW(id) {
 }
 
 function BuyM(id, qty) {
-	let price = GetMissionPrice(id, qty);
+	const price = GetMissionPrice(id, qty);
 
 	if (price <= p.cash) {
 		p.cash -= price;
@@ -381,7 +381,7 @@ function BuyM(id, qty) {
 }
 
 function SellM(id, qty) {
-	let price = GetMissionSellPrice(id, qty);
+	const price = GetMissionSellPrice(id, qty);
 	if (p.missions[id] == null) p.missions[id] = 0;
 	p.cash += price;
 	p.stats.totalspentcash -= price;
@@ -412,7 +412,7 @@ function GetMissionPrice(id, qty) {
 }
 
 function GetMissionPriceModifier(amount) {
-	Mapping = {
+	const Mapping = {
 		1:       1.07,
 		50:      1.05,
 		100:     1.025,
@@ -439,7 +439,7 @@ function GetMissionSellPrice(id, qty) {
 }
 
 function buyV(id) {
-	let price = GetMultPrice(id);
+	const price = GetMultPrice(id);
 
 	if (p.points >= price) {
 		p.points -= price;
@@ -452,7 +452,7 @@ function buyV(id) {
 }
 
 function GetQuestTitle() {
-	let TYPE = p.quest.type;
+	const TYPE = p.quest.type;
 	let MESSAGE = "";
 
 	if (TYPE === 0) MESSAGE = "Use your weapon <span class='jaune'>" + p.quest.objective[0] + "</span> times";
@@ -463,7 +463,7 @@ function GetQuestTitle() {
 }
 
 function getQuestType(id) {
-	let map = {
+	const map = {
 		0: "Use Weapon",
 		1: "Increase Mission",
 		2: "Reach Rank",
@@ -473,22 +473,22 @@ function getQuestType(id) {
 }
 
 function ListMissionsBought() {
-	let filtered = [];
+	const filtered = [];
 
-	for (let M in missions) {
+	for (const M in missions) {
 		if (p.missions[M] > 0) filtered.push(Number(M));
 	}
 	return filtered;
 }
 
 function NewObjective() {
-	let QUEST = {
+	const QUEST = {
 		type: 0,
 		reward: 1,
 		progression: 0,
 		objective: [0, 0],
 	};
-	let filter = ListMissionsBought();
+	const filter = ListMissionsBought();
 	let chance = _.random(0, 100);
 	QUEST.objective[1] = null;
 	QUEST.type = _.random(0, 3);
@@ -523,9 +523,9 @@ function NewObjective() {
 		{ chance: 99, objective: [80, 10] },
 	];
 
-	let selectedReward = rewardMap.find(r => chance >= r.min && chance <= r.max);
+	const selectedReward = rewardMap.find(r => chance >= r.min && chance <= r.max);
 
-	let selectedObjective = goal_main_Map.find(o => chance < o.chance);
+	const selectedObjective = goal_main_Map.find(o => chance < o.chance);
 	// USE X TIMES WEAPON 
 	if (QUEST.type === 0) {
 		QUEST.progression = 0;
@@ -535,8 +535,8 @@ function NewObjective() {
 
 	// INCREASE X TIMES MISSION
 	if (QUEST.type === 1) {
-		let selectedObjective2 = goal_mission_Map.find(o => chance < o.chance);
-		let objective = filter[Math.floor(Math.random() * filter.length)];
+		const selectedObjective2 = goal_mission_Map.find(o => chance < o.chance);
+		const objective = filter[Math.floor(Math.random() * filter.length)];
 
 		QUEST.objective = [p.missions[objective], objective];
 		QUEST.objective[0] = _.random(selectedObjective2.objective[0], selectedObjective2.objective[1]);
@@ -552,7 +552,7 @@ function NewObjective() {
 
 	// BUY WEAPON WITH X STARS
 	if (QUEST.type === 3) {
-		let lowest = _.min(p.Stars.slice(1));
+		const lowest = _.min(p.Stars.slice(1));
 
 		const minStarChanceMap = [
 			{ star: 1, minChance: 0 },
