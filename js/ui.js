@@ -6,111 +6,111 @@
 	const PrestigePoints = p.rank < 400 ? 0 : Math.trunc(p.rank / 200);
 	const prestigeText = p.prestige.price[0] <= p.rank && p.prestige.price[1] <= p.cash ? texts.infos[0] : "";
 	//LEFT INFOS
-	$('#imagecash').attr('style', "background-image:url('" + weapons[p.Weapon.Id].img + "');");
+	document.getElementById('imagecash').style.backgroundImage = "url('" + weapons[p.Weapon.Id].img + "')";
 	//$("#status_cps").html(""); unused for now
-	$("#status_cash").html("R " + fix(p.cash, "full") + "<div class='sub header'>+ " + fix(getCashPS(), "full") + " per second</div>");
-	$("#status_level").html(getRank(p.rank));
-	$("#status_weapon").html(weapons[p.Weapon.Id].name + " " + GenStarLabel(p.Stars[p.Weapon.Id]));
-	$("#status_weapon").attr("class", 'col-span-3 font-bold flex items-center justify-end gap-2 ' + p.Weapon.Class);
-	$("#status_damage").attr("class", 'col-span-3 font-bold flex items-center justify-end gap-2 ' + p.Weapon.Class);
-	$("#status_damage").html("<i class='text-error fa-thin fa-crosshairs-simple'></i> " + ClicCashText);
-	$("#status_points").html("<span class='jaune'><i class='fa-light fa-coin'></i> " + fix(p.points, 2) + "</span>");
-	$("#messages").html(prestigeText);
+	document.getElementById("status_cash").innerHTML = "R " + fix(p.cash, "full") + "<div class='sub header'>+ " + fix(getCashPS(), "full") + " per second</div>";
+	document.getElementById("status_level").innerHTML = getRank(p.rank);
+	document.getElementById("status_weapon").innerHTML = weapons[p.Weapon.Id].name + " " + GenStarLabel(p.Stars[p.Weapon.Id]);
+	document.getElementById("status_weapon").className = 'col-span-3 font-bold flex items-center justify-end gap-2 ' + p.Weapon.Class;
+	document.getElementById("status_damage").className = 'col-span-3 font-bold flex items-center justify-end gap-2 ' + p.Weapon.Class;
+	document.getElementById("status_damage").innerHTML = "<i class='text-error fa-thin fa-crosshairs-simple'></i> " + ClicCashText;
+	document.getElementById("status_points").innerHTML = "<span class='jaune'><i class='fa-light fa-coin'></i> " + fix(p.points, 2) + "</span>";
+	document.getElementById("messages").innerHTML = prestigeText;
 	//CHARACTER
-	$("#prestigecount").html(p.prestige.level);
-	$("#prestigepricecount").html(getRank(p.prestige.price[0]));
-	$("#prestigepricecount2").html("R " + fix(p.prestige.price[1], "full"));
-	$("#character-text4").html(texts.character[5] + "<span class='jaune'> " + PrestigePoints + " </span> " + texts.character[6]);
-	$("#character-text5").html(texts.character[7] + "<span class='jaune'> " + fix(p.prestige.bonus, 9) + "</span> " + texts.character[8]);
+	document.getElementById("prestigecount").innerHTML = p.prestige.level;
+	document.getElementById("prestigepricecount").innerHTML = getRank(p.prestige.price[0]);
+	document.getElementById("prestigepricecount2").innerHTML = "R " + fix(p.prestige.price[1], "full");
+	document.getElementById("character-text4").innerHTML = texts.character[5] + "<span class='jaune'> " + PrestigePoints + " </span> " + texts.character[6];
+	document.getElementById("character-text5").innerHTML = texts.character[7] + "<span class='jaune'> " + fix(p.prestige.bonus, 9) + "</span> " + texts.character[8];
 	//GENERAL STATS
-	$("#ObjectivesCompleted").html(p.stats.completedquests + " Objectives completed.");
-	$("#totalclicks").html("Clicked " + fix(p.stats.totalclicks, 3) + " times.");
-	$("#highestrank").html("Highest rank achieved: " + getRank(p.stats.highestrank));
-	$("#totalsuccess").html("Total successes unlocked: <font class='jaune'>" + SuccessCount() + "</font>/" + success.length);
+	document.getElementById("ObjectivesCompleted").innerHTML = p.stats.completedquests + " Objectives completed.";
+	document.getElementById("totalclicks").innerHTML = "Clicked " + fix(p.stats.totalclicks, 3) + " times.";
+	document.getElementById("highestrank").innerHTML = "Highest rank achieved: " + getRank(p.stats.highestrank);
+	document.getElementById("totalsuccess").innerHTML = "Total successes unlocked: <font class='jaune'>" + SuccessCount() + "</font>/" + success.length;
 	// CHARACTER STATS
-	$("#spcount").html("Character number <font class='jaune'>" + p.prestige.level + "</font>");
-	$("#pointsspent").html("<font class='jaune'><i class='fa-light fa-coin'></i>" + fix(p.stats.spentpoints, 2) + "</font> points spent");
-	$("#boughtvehicles1").html("Strength (damage) multiplier <font class='bold jaune'>" + p.prestige.multipliers[0] + "</font>/1000");
-	$("#boughtvehicles2").html("Stamina (cash) multiplier <font class='bold jaune'>" + p.prestige.multipliers[1] + "</font>/1000");
-	$("#boughtvehicles3").html("Stealth (rewards) multiplier <font class='bold jaune'>" + p.prestige.multipliers[2] + "</font>/1000");
+	document.getElementById("spcount").innerHTML = "Character number <font class='jaune'>" + p.prestige.level + "</font>";
+	document.getElementById("pointsspent").innerHTML = "<font class='jaune'><i class='fa-light fa-coin'></i>" + fix(p.stats.spentpoints, 2) + "</font> points spent";
+	document.getElementById("boughtvehicles1").innerHTML = "Strength (damage) multiplier <font class='bold jaune'>" + p.prestige.multipliers[0] + "</font>/1000";
+	document.getElementById("boughtvehicles2").innerHTML = "Stamina (cash) multiplier <font class='bold jaune'>" + p.prestige.multipliers[1] + "</font>/1000";
+	document.getElementById("boughtvehicles3").innerHTML = "Stealth (rewards) multiplier <font class='bold jaune'>" + p.prestige.multipliers[2] + "</font>/1000";
 	//WEAPONS STATS
-	$("#lowestweaponrank").html("Lowest weapon rank: " + GenStarLabel(_.min(p.Stars.slice(1))));
-	$("#highestweaponrank").html("Highest weapon rank: " + GenStarLabel(_.max(p.Stars.slice(1))));
-	$("#weapons-bought").html("Current weapons acquired: " + WeaponsNBR + "/" + AllWeaponsNBR);
-	$("#totalweaponsbought").html("Total weapons bought: <font class='jaune'>" + p.stats.totalweaponsbought + "</font>");
-	$("#totalweaponrerolled").html("Total weapon rerolled: <font class='jaune'>" + p.stats.totalweaponrerolled + "</font>");
+	document.getElementById("lowestweaponrank").innerHTML = "Lowest weapon rank: " + GenStarLabel(_.min(p.Stars.slice(1)));
+	document.getElementById("highestweaponrank").innerHTML = "Highest weapon rank: " + GenStarLabel(_.max(p.Stars.slice(1)));
+	document.getElementById("weapons-bought").innerHTML = "Current weapons acquired: " + WeaponsNBR + "/" + AllWeaponsNBR;
+	document.getElementById("totalweaponsbought").innerHTML = "Total weapons bought: <font class='jaune'>" + p.stats.totalweaponsbought + "</font>";
+	document.getElementById("totalweaponrerolled").innerHTML = "Total weapon rerolled: <font class='jaune'>" + p.stats.totalweaponrerolled + "</font>";
 	//CASH STATS
-	$("#cashcount").html("<span class='desc jaune'>R " + fix(p.cash, "full") + "</span> " + texts.stats[6]);
-	$("#cashpscount").html("<span class='desc jaune'>R " + fix(getCashPS(), "full") + "</span> " + texts.stats[7]);
-	$("#addcashcount").html("<span class='desc jaune'>R " + ClicCashText + "</span> " + texts.stats[8]);
-	$("#character_totalspentcash").html("<span class='desc tc-spent-dollar'>R " + fix(p.stats.character_totalspentcash, "full") + "</span> spent with character");
-	$("#character_totalcash").html("<span class='desc jaune'>R " + fix(p.stats.character_totalcash, "full") + "</span> earned with character");
-	$("#totalspentcash").html("<span class='desc tc-spent-dollar'>R " + fix(p.stats.totalspentcash, "full") + "</span> spent in total");
-	$("#totalcash").html("<span class='desc jaune'>R " + fix(p.stats.totalcash, "full") + "</span> earned in total");
+	document.getElementById("cashcount").innerHTML = "<span class='desc jaune'>R " + fix(p.cash, "full") + "</span> " + texts.stats[6];
+	document.getElementById("cashpscount").innerHTML = "<span class='desc jaune'>R " + fix(getCashPS(), "full") + "</span> " + texts.stats[7];
+	document.getElementById("addcashcount").innerHTML = "<span class='desc jaune'>R " + ClicCashText + "</span> " + texts.stats[8];
+	document.getElementById("character_totalspentcash").innerHTML = "<span class='desc tc-spent-dollar'>R " + fix(p.stats.character_totalspentcash, "full") + "</span> spent with character";
+	document.getElementById("character_totalcash").innerHTML = "<span class='desc jaune'>R " + fix(p.stats.character_totalcash, "full") + "</span> earned with character";
+	document.getElementById("totalspentcash").innerHTML = "<span class='desc tc-spent-dollar'>R " + fix(p.stats.totalspentcash, "full") + "</span> spent in total";
+	document.getElementById("totalcash").innerHTML = "<span class='desc jaune'>R " + fix(p.stats.totalcash, "full") + "</span> earned in total";
 	//MULTIPLIERS STATS
-	$("#prestigemult").html("Prestige multiplier at <font class='jaune bold'>" + fix(p.prestige.bonus, 9) + "</font>");
-	$("#cashmult").html("Cash (stamina) multiplier at <font class='jaune bold'>" + fix((p.prestige.bonus + (p.prestige.multipliers[0] * 0.1)), 9) + "</font>");
-	$("#damagemult").html("Damage (strength) multiplier at <font class='jaune bold'>" + fix((p.prestige.bonus + (p.prestige.multipliers[1] * 0.1)), 9) + "</font>");
-	$("#stealthmult").html("Objective Rewards (stealth) multiplier at <font class='jaune bold'>" + fix(p.prestige.bonus + p.prestige.multipliers[2] * 0.1, 9) + "</font>");
+	document.getElementById("prestigemult").innerHTML = "Prestige multiplier at <font class='jaune bold'>" + fix(p.prestige.bonus, 9) + "</font>";
+	document.getElementById("cashmult").innerHTML = "Cash (stamina) multiplier at <font class='jaune bold'>" + fix((p.prestige.bonus + (p.prestige.multipliers[0] * 0.1)), 9) + "</font>";
+	document.getElementById("damagemult").innerHTML = "Damage (strength) multiplier at <font class='jaune bold'>" + fix((p.prestige.bonus + (p.prestige.multipliers[1] * 0.1)), 9) + "</font>";
+	document.getElementById("stealthmult").innerHTML = "Objective Rewards (stealth) multiplier at <font class='jaune bold'>" + fix(p.prestige.bonus + p.prestige.multipliers[2] * 0.1, 9) + "</font>";
 	//OTHERS STATS
 
-	$("#time").html(texts.stats[10] + " " + p.DateStarted + "<br />" + texts.stats[11] + " <font class='jaune'>" + toHHMMSS(p.stats.totalplaytime) + "</font>");
+	document.getElementById("time").innerHTML = texts.stats[10] + " " + p.DateStarted + "<br />" + texts.stats[11] + " <font class='jaune'>" + toHHMMSS(p.stats.totalplaytime) + "</font>";
 	//OBJECTIVES
-	$("#objective").html(GetQuestTitle());
-	$("#quest_rewards").html("<i class='fa-light fa-coin'></i> " + fix(p.quest.reward + p.quest.reward * (p.prestige.multipliers[2] * 0.1), "dynamic"));
+	document.getElementById("objective").innerHTML = GetQuestTitle();
+	document.getElementById("quest_rewards").innerHTML = "<i class='fa-light fa-coin'></i> " + fix(p.quest.reward + p.quest.reward * (p.prestige.multipliers[2] * 0.1), "dynamic");
 
-	if (p.points >= 0.5) $("#ChangeObjective").attr("class", "btn btn-warning btn-outline w-full mt-2");
-	else $("#ChangeObjective").attr("class", "btn btn-error btn-outline w-full mt-2");
+	if (p.points >= 0.5) document.getElementById("ChangeObjective").className = "btn btn-warning btn-outline w-full mt-2";
+	else document.getElementById("ChangeObjective").className = "btn btn-error btn-outline w-full mt-2";
 
-	$("#successcount").html("<font class='SuccessText'>" + SuccessCount() + "</font>/" + success.length + " " + texts.success[0]);
+	document.getElementById("successcount").innerHTML = "<font class='SuccessText'>" + SuccessCount() + "</font>/" + success.length + " " + texts.success[0];
 	SuccessList();
 }
 
 function UpdateTabs() {
-	if ($('#tab1').is(":visible")) UpdateWeapons();
-	if ($('#tab2').is(":visible")) UpdateMissions();
-	if ($('#tab3').is(":visible")) VehicleList();
+	if (document.getElementById('tab1').style.display !== 'none') UpdateWeapons();
+	if (document.getElementById('tab2').style.display !== 'none') UpdateMissions();
+	if (document.getElementById('tab3').style.display !== 'none') VehicleList();
 }
 
 function UpdateTexts() {
 	//MENU
-	$("#t0").html("<i class='fa-solid fa-bars'></i> " + texts.menu[0]);
-	$("#t1").html("<i class='fa-thin fa-crosshairs-simple'></i> " + texts.menu[1]);
-	$("#t2").html("<i class='fa-solid fa-dollar-sign'></i> " + texts.menu[2]);
-	$("#t3").html("<i class='fa-solid fa-user'></i> " + texts.menu[3]);
-	$("#t4").html("<i class='fa-solid fa-chart-bar'></i> " + texts.menu[4]);
+	document.getElementById("t0").innerHTML = "<i class='fa-solid fa-bars'></i> " + texts.menu[0];
+	document.getElementById("t1").innerHTML = "<i class='fa-thin fa-crosshairs-simple'></i> " + texts.menu[1];
+	document.getElementById("t2").innerHTML = "<i class='fa-solid fa-dollar-sign'></i> " + texts.menu[2];
+	document.getElementById("t3").innerHTML = "<i class='fa-solid fa-user'></i> " + texts.menu[3];
+	document.getElementById("t4").innerHTML = "<i class='fa-solid fa-chart-bar'></i> " + texts.menu[4];
 	//PRESTIGE TEXTS
-	$("#character-number").html(texts.character[1]);
-	$("#character-text1").html(texts.character[2]);
-	$("#character-text2").html(texts.character[3]);
-	$("#character-text3").html(texts.character[4]);
-	$("#btnPrestige").val(texts.character[0]);
+	document.getElementById("character-number").innerHTML = texts.character[1];
+	document.getElementById("character-text1").innerHTML = texts.character[2];
+	document.getElementById("character-text2").innerHTML = texts.character[3];
+	document.getElementById("character-text3").innerHTML = texts.character[4];
+	document.getElementById("btnPrestige").value = texts.character[0];
 	//WEAPONS TYPES BUTTONS
-	for (let weapon = 1; weapon < 9; weapon++) { $("#W" + weapon).html(texts.weapontype[weapon] + " (" + p.WeaponType[weapon] + "/" + countWeaponsByType()[weapon] + ")"); }
+	for (let weapon = 1; weapon < 9; weapon++) { document.getElementById("W" + weapon).innerHTML = texts.weapontype[weapon] + " (" + p.WeaponType[weapon] + "/" + countWeaponsByType()[weapon] + ")"; }
 	//SUCCESS
-	$("#S0").html(texts.success[1]);
-	$("#S1").html(texts.success[2]);
-	$("#S2").html(texts.success[3]);
-	$("#S3").html(texts.success[4]);
-	$("#CloseSuccess").html(texts.success[5]);
+	document.getElementById("S0").innerHTML = texts.success[1];
+	document.getElementById("S1").innerHTML = texts.success[2];
+	document.getElementById("S2").innerHTML = texts.success[3];
+	document.getElementById("S3").innerHTML = texts.success[4];
+	document.getElementById("CloseSuccess").innerHTML = texts.success[5];
 	//SAVE & STATS
-	$("#options-title").html(texts.stats[13]);
-	$("#btnBackgrounds").val(texts.stats[14]);
-	$("#savemenu").html(texts.stats[0]);
-	$("#btnExport").val(texts.stats[2]);
-	$("#btnImport").val(texts.stats[3]);
-	$("#Recommencer").val(texts.stats[4]);
-	$("#CloseStats").html(texts.stats[5]);
-	$("#statistics").html(texts.stats[1]);
-	$("#version").html(texts.stats[12] + " " + version);
+	document.getElementById("options-title").innerHTML = texts.stats[13];
+	document.getElementById("btnBackgrounds").value = texts.stats[14];
+	document.getElementById("savemenu").innerHTML = texts.stats[0];
+	document.getElementById("btnExport").value = texts.stats[2];
+	document.getElementById("btnImport").value = texts.stats[3];
+	document.getElementById("Recommencer").value = texts.stats[4];
+	document.getElementById("CloseStats").innerHTML = texts.stats[5];
+	document.getElementById("statistics").innerHTML = texts.stats[1];
+	document.getElementById("version").innerHTML = texts.stats[12] + " " + version;
 	document.title = "Mzansi Crime Idle " + version;
 }
 
 //MISSIONS TABLE
 function MissionList() {
-	$('#missions').html("");
+	document.getElementById('missions').innerHTML = "";
 	for (const i in missions) {
-		const CONTENT = $(`
+		const CONTENT = `
 			<div class="card bg-base-200 shadow-xl" id="mission-${i}">
 				<div class="card-body p-4">
 					<h3 class="card-title text-base">${missions[i].name}</h3>
@@ -135,12 +135,12 @@ function MissionList() {
 						</div>
 					</div>
 				</div>
-			</div>`);
-		$('#missions').append(CONTENT);
-		if (p.rank >= missions[i].level) $("#mission-" + i).show(); else $("#mission-" + i).hide();
+			</div>`;
+		document.getElementById('missions').insertAdjacentHTML('beforeend', CONTENT);
+		if (p.rank >= missions[i].level) document.getElementById("mission-" + i).style.display = ''; else document.getElementById("mission-" + i).style.display = 'none';
 	}
-	$("#tab2").append(`<div id='NextMissionUnlock' class='alert alert-warning mt-4'>Next mission unlocks at rank 0</div>`);
-	if (getLatestUnlockedMissionId("latest") === "allUnlocked") $("#NextMissionUnlock").hide(); else $("#NextMissionUnlock").show();
+	document.getElementById("tab2").insertAdjacentHTML('beforeend', `<div id='NextMissionUnlock' class='alert alert-warning mt-4'>Next mission unlocks at rank 0</div>`);
+	if (getLatestUnlockedMissionId("latest") === "allUnlocked") document.getElementById("NextMissionUnlock").style.display = 'none'; else document.getElementById("NextMissionUnlock").style.display = '';
 }
 
 function UpdateMissions(onlyId) {
@@ -152,37 +152,37 @@ function UpdateMissions(onlyId) {
 
 function UpdateMissionsDiv(i) {
 	// $("#mission-" + i).attr("class", p.missions[i] < 1 ? '' : 'item-active'); // Card style handles this differently
-	$("#mission-" + i + "-level").html(p.missions[i]);
-	$("#mission-" + i + "-next").html(getNextMilestone(p.missions[i]));
-	$("#mission-" + i + "-value").html("Cost: R " + fix(GetMissionPrice(i, 1), 1));
+	document.getElementById("mission-" + i + "-level").innerHTML = p.missions[i];
+	document.getElementById("mission-" + i + "-next").innerHTML = getNextMilestone(p.missions[i]);
+	document.getElementById("mission-" + i + "-value").innerHTML = "Cost: R " + fix(GetMissionPrice(i, 1), 1);
 	
 	const prodVal = (missions[i].value * p.missions[i]) * (p.prestige.bonus + (p.prestige.multipliers[0] * 0.1));
-	$("#mission-" + i + "-production").html("R " + fix(prodVal, 1) + "/s");
+	document.getElementById("mission-" + i + "-production").innerHTML = "R " + fix(prodVal, 1) + "/s";
 
-	$("#mission-" + i + "-btnB1").prop("disabled", GetMissionPrice(i, 1) > p.cash);
-	$("#mission-" + i + "-btnB10").prop("disabled", GetMissionPrice(i, 10) > p.cash);
-	$("#mission-" + i + "-btnB100").prop("disabled", GetMissionPrice(i, 100) > p.cash);
-	$("#mission-" + i + "-btnS1").prop("disabled", p.missions[i] < 1);
-	$("#mission-" + i + "-btnS10").prop("disabled", p.missions[i] < 10);
-	$("#mission-" + i + "-btnS100").prop("disabled", p.missions[i] < 100);
+	document.getElementById("mission-" + i + "-btnB1").disabled = GetMissionPrice(i, 1) > p.cash;
+	document.getElementById("mission-" + i + "-btnB10").disabled = GetMissionPrice(i, 10) > p.cash;
+	document.getElementById("mission-" + i + "-btnB100").disabled = GetMissionPrice(i, 100) > p.cash;
+	document.getElementById("mission-" + i + "-btnS1").disabled = p.missions[i] < 1;
+	document.getElementById("mission-" + i + "-btnS10").disabled = p.missions[i] < 10;
+	document.getElementById("mission-" + i + "-btnS100").disabled = p.missions[i] < 100;
 	if (getLatestUnlockedMissionId("latest") === "allUnlocked") {
-		$("#NextMissionUnlock").hide();
+		document.getElementById("NextMissionUnlock").style.display = 'none';
 	}
 	else {
-		$("#NextMissionUnlock").html(`Next mission unlocks at rank ${missions[getLatestUnlockedMissionId("next")].level}`);
-		$("#NextMissionUnlock").show();
+		document.getElementById("NextMissionUnlock").innerHTML = `Next mission unlocks at rank ${missions[getLatestUnlockedMissionId("next")].level}`;
+		document.getElementById("NextMissionUnlock").style.display = '';
 	}
-	if (p.rank >= missions[i].level) $("#mission-" + i).show();
+	if (p.rank >= missions[i].level) document.getElementById("mission-" + i).style.display = '';
 }
 
 //WEAPONS TABLE
 function WeaponList() {
 	for (let id = 1; id < 9; id++) {
-		$('#Wtab' + id).html("");
+		document.getElementById('Wtab' + id).innerHTML = "";
 	}
 
 	for (const i in weapons) {
-		const CONTENT = $(`
+		const CONTENT = `
             <div class="card bg-base-200 shadow-xl" id="weapon-${i}">
                 <figure class="px-4 pt-4">
                     <img src="${weapons[i].img}" class="rounded-xl h-32 object-contain bg-base-300 w-full" style="background: #333;">
@@ -196,8 +196,8 @@ function WeaponList() {
                     </div>
                 </div>
             </div>
-        `);
-		$('#Wtab' + weapons[i].type).append(CONTENT);
+        `;
+		document.getElementById('Wtab' + weapons[i].type).insertAdjacentHTML('beforeend', CONTENT);
 	}
 }
 
@@ -206,17 +206,17 @@ function UpdateWeapons() {
 		const COST = p.WeaponBought[i] < 1 ? fix(weapons[i].price, 1) : fix(weapons[i].price * 1.25, 1);
 		const PURCHASED_TEXT = p.WeaponBought[i] > 0 ? "" : `<i class="fa-solid fa-lock-keyhole"></i> `;
 		
-		$("#weapon-" + i + "-name").html(`${PURCHASED_TEXT}${GenStarLabel(p.Stars[i])} <span class="${getQuality(p.Stars[i])}">${weapons[i].name}</span>`);
+		document.getElementById("weapon-" + i + "-name").innerHTML = `${PURCHASED_TEXT}${GenStarLabel(p.Stars[i])} <span class="${getQuality(p.Stars[i])}">${weapons[i].name}</span>`;
 		
 		const powerVal = fix(weapons[i].power * (GetWeaponMult(i) + ((p.prestige.bonus + p.prestige.multipliers[1]) * 0.1) - 0.1), 1);
-		$("#weapon-" + i + "-price").html(`R ${COST} <br><small style="color: #db2828;"><i class="fa-thin fa-crosshairs-simple"></i> ${powerVal}</small>`);
+		document.getElementById("weapon-" + i + "-price").innerHTML = `R ${COST} <br><small style="color: #db2828;"><i class="fa-thin fa-crosshairs-simple"></i> ${powerVal}</small>`;
 		
 		const canBuy = p.cash >= (p.WeaponBought[i] < 1 ? weapons[i].price : weapons[i].price * 1.25);
 		let purchaseBtnClass = canBuy ? "btn btn-sm btn-warning w-full" : "btn btn-sm btn-error btn-outline w-full btn-disabled";
 		if (p.Stars[i] === 10 && p.WeaponBought[i] > 0) purchaseBtnClass = "btn btn-sm btn-warning btn-outline w-full btn-disabled";
 		let purchaseText = p.WeaponBought[i] > 0 ? "Roll" : "Buy";
 		if (p.Stars[i] === 10 && p.WeaponBought[i] > 0) purchaseText = "Maxed";
-		$("#weapon-" + i + "-purchase").attr("class", purchaseBtnClass).html(purchaseText);
+		const purchaseBtn = document.getElementById("weapon-" + i + "-purchase"); purchaseBtn.className = purchaseBtnClass; purchaseBtn.innerHTML = purchaseText;
 		
 		let equipBtnClass = p.WeaponBought[i] > 0 ? "btn btn-sm btn-neutral w-full" : "btn btn-sm btn-neutral w-full btn-disabled";
 		let equipText = "Equip";
@@ -224,10 +224,10 @@ function UpdateWeapons() {
 			equipBtnClass = "btn btn-sm btn-success w-full btn-disabled";
 			equipText = "Equipped";
 		}
-		$("#weapon-" + i + "-equip").attr("class", equipBtnClass).html(equipText);
+		const equipBtn = document.getElementById("weapon-" + i + "-equip"); equipBtn.className = equipBtnClass; equipBtn.innerHTML = equipText;
 		
-		if (p.WeaponBought[i] < 1) $("#weapon-" + i).css("opacity", "0.7");
-		else $("#weapon-" + i).css("opacity", "1");
+		if (p.WeaponBought[i] < 1) document.getElementById("weapon-" + i).style.opacity = "0.7";
+		else document.getElementById("weapon-" + i).style.opacity = "1";
 	}
 }
 
@@ -265,70 +265,94 @@ function VehicleList() {
 		);
 	}
 	content += "</tbody>";
-	$('#Vtab').html(content);
+	document.getElementById('Vtab').innerHTML = content;
 }
 
 //UI FUNCTIONS
 
-function btnPrestigeD() { $("#btnPrestige").addClass("btn-disabled"); }
-function btnPrestigeE() { $("#btnPrestige").removeClass("btn-disabled"); }
-function hideTabs() { for (let id = 1; id < 6; id++) { $("#tab" + id).hide(); $("#t" + id).removeClass("btn-active text-warning"); } }
+function btnPrestigeD() { document.getElementById("btnPrestige").classList.add("btn-disabled"); }
+function btnPrestigeE() { document.getElementById("btnPrestige").classList.remove("btn-disabled"); }
+function hideTabs() { for (let id = 1; id < 6; id++) { document.getElementById("tab" + id).style.display = 'none'; document.getElementById("t" + id).classList.remove("btn-active", "text-warning"); } }
 function hideMenus() { for (let id = 1; id < 6; id++) { document.getElementById('modal-' + id).close(); } }
-function hideWTabs() { for (let id = 0; id < 10; id++) { $('#Wtab' + id).hide(); $("#W" + id).removeClass('tab-active'); } }
-function hideSTabs() { for (let id = 0; id < 10; id++) { $('#Stab' + id).hide(); $("#succcess-btn-" + id).removeClass('tab-active'); } }
+function hideWTabs() { for (let id = 0; id < 10; id++) { if(document.getElementById('Wtab' + id)) document.getElementById('Wtab' + id).style.display = 'none'; if(document.getElementById("W" + id)) document.getElementById("W" + id).classList.remove('tab-active'); } }
+function hideSTabs() { for (let id = 0; id < 10; id++) { if(document.getElementById('Stab' + id)) document.getElementById('Stab' + id).style.display = 'none'; if(document.getElementById("succcess-btn-" + id)) document.getElementById("succcess-btn-" + id).classList.remove('tab-active'); } }
 
 function ClickEvents() {
-	$("#game-menu").on("click", "a", function () {
-		const id = $(this).data('id'); hideTabs();
-		$("#tab" + id).show();
-		$("#t" + id).addClass("btn-active text-warning");
-		UpdateUI();
-		UpdateTabs();
-	});
-	$("#sidebar").on("click", "a", function () {
-		const id = $(this).data('id');
-		document.getElementById('modal-' + id).showModal();
-		UpdateUI();
-	});
-	$("#mobile-bottom-nav").on("click", "button", function () {
-		const id = $(this).data('id');
-		if (id == 0) {
-			$("#sidebar").toggleClass("hidden flex");
-		} else {
+	document.getElementById("game-menu").addEventListener("click", function (e) {
+		const target = e.target.closest("a");
+		if (target) {
+			const id = target.dataset.id;
 			hideTabs();
-			$("#tab" + id).show();
-			$("#mobile-bottom-nav button").removeClass("active text-success bg-base-300").addClass("text-neutral-content");
-			$(this).removeClass("text-neutral-content").addClass("active text-success bg-base-300");
-			$("#t" + id).addClass("btn-active text-warning");
+			document.getElementById("tab" + id).style.display = '';
+			document.getElementById("t" + id).classList.add("btn-active", "text-warning");
 			UpdateUI();
 			UpdateTabs();
 		}
 	});
-	$("#weap-select").on("click", "a", function () {
-		const id = $(this).data('id');
-		hideWTabs();
-		$('#Wtab' + id).show();
-		$("#W" + id).addClass("tab-active");
+	document.getElementById("sidebar").addEventListener("click", function (e) {
+		const target = e.target.closest("a");
+		if (target) {
+			const id = target.dataset.id;
+			document.getElementById('modal-' + id).showModal();
+			UpdateUI();
+		}
 	});
-	$("#ChangeObjective").on("click", function () {
+	document.getElementById("mobile-bottom-nav").addEventListener("click", function (e) {
+		const target = e.target.closest("button");
+		if (target) {
+			const id = target.dataset.id;
+			if (id == 0) {
+				const sb = document.getElementById("sidebar");
+				sb.classList.toggle("hidden");
+				sb.classList.toggle("flex");
+			} else {
+				hideTabs();
+				document.getElementById("tab" + id).style.display = '';
+				document.querySelectorAll("#mobile-bottom-nav button").forEach(el => {
+					el.classList.remove("active", "text-success", "bg-base-300");
+					el.classList.add("text-neutral-content");
+				});
+				target.classList.remove("text-neutral-content");
+				target.classList.add("active", "text-success", "bg-base-300");
+				document.getElementById("t" + id).classList.add("btn-active", "text-warning");
+				UpdateUI();
+				UpdateTabs();
+			}
+		}
+	});
+	document.getElementById("weap-select").addEventListener("click", function (e) {
+		const target = e.target.closest("a");
+		if (!target) return;
+		const id = target.dataset.id;
+		hideWTabs();
+		document.getElementById('Wtab' + id).style.display = '';
+		document.getElementById("W" + id).classList.add("tab-active");
+	});
+	document.getElementById("ChangeObjective").addEventListener("click", function () {
 		if (p.points >= 0.5) {
 			p.points -= 0.5;
 			NewObjective();
 		}
 	});
-	$("#top-menu").on("click", "#t0", function () {
-		$("#sidebar").toggleClass("hidden flex");
+	document.getElementById("top-menu").addEventListener("click", function (e) {
+		if (e.target.closest("#t0")) {
+			const sb = document.getElementById("sidebar");
+			sb.classList.toggle("hidden");
+			sb.classList.toggle("flex");
+		}
 	});
-	$("#successtype").on("click", "button", function () {
-		const id = $(this).data('id');
+	document.getElementById("successtype").addEventListener("click", function (e) {
+		const target = e.target.closest("button");
+		if (!target) return;
+		const id = target.dataset.id;
 		hideSTabs();
-		$('#Stab' + id).show();
-		$("#succcess-btn-" + id).addClass("tab-active");
+		document.getElementById('Stab' + id).style.display = '';
+		document.getElementById("succcess-btn-" + id).classList.add("tab-active");
 	});
-	$("#closeMSG").on("click", function () {
+	document.getElementById("closeMSG").addEventListener("click", function () {
 		hideMenus();
 	});
-	$("#imagecontainer").on("click", function () { ClickWeapon(); });
+	document.getElementById("imagecontainer").addEventListener("click", function () { ClickWeapon(); });
 }
 
 //SUCCESS MENU
@@ -350,24 +374,24 @@ function SuccessCount() {
 }
 
 function SuccessList() {
-	for (let id = 0; id < 4; id++) { $('#Stab' + id).html(""); }
+	for (let id = 0; id < 4; id++) { document.getElementById('Stab' + id).innerHTML = ""; }
 
 	for (const i in success) {
 		const succes = success[i];
 		const unlocked = p.succes[i] > 0 ? "<i class='fa-solid fa-check text-success'></i>" : "<i class='fa-solid fa-times text-error'></i>";
 
-		const succesDIV = $(
+		const succesDIV = 
 			"<div class='alert shadow-lg mb-2'>" +
 			unlocked +
 			"<div class='content'><p class='text type2'>" + succes.name + "</p>" +
-			"<p>" + succes.desc + "</p></div></div>"
-		);
-		if (succes.type === 0) { $('#Stab0').append(succesDIV); } // Tutorial
-		if (succes.type === 1) { $('#Stab1').append(succesDIV); } // Cash
-		if (succes.type === 2) { $('#Stab2').append(succesDIV); } // Missions
+			"<p>" + succes.desc + "</p></div></div>";
+		
+		if (succes.type === 0) { document.getElementById('Stab0').insertAdjacentHTML('beforeend', succesDIV); } // Tutorial
+		if (succes.type === 1) { document.getElementById('Stab1').insertAdjacentHTML('beforeend', succesDIV); } // Cash
+		if (succes.type === 2) { document.getElementById('Stab2').insertAdjacentHTML('beforeend', succesDIV); } // Missions
 		//if (succes.type === 3) { $('#Stab2').append(succesDIV); } Unused
-		if (succes.type === 4) { $('#Stab0').append(succesDIV); } // Ranks
-		if (succes.type === 5) { $('#Stab3').append(succesDIV); } // Prestige
+		if (succes.type === 4) { document.getElementById('Stab0').insertAdjacentHTML('beforeend', succesDIV); } // Ranks
+		if (succes.type === 5) { document.getElementById('Stab3').insertAdjacentHTML('beforeend', succesDIV); } // Prestige
 	}
 }
 
@@ -375,13 +399,13 @@ function SuccessList() {
 
 function showTutorial(id) {
 	p.tutorial = id;
-	$("#tutorial-title").html("Guide - " + tutorialtexts[id].title);
-	$("#tutorial-text").html(tutorialtexts[id].text);
-	if (p.tutorial == 0) { $("#tuto-prev").addClass("btn-disabled"); } else {
-		$("#tuto-prev").removeClass("btn-disabled");
+	document.getElementById("tutorial-title").innerHTML = "Guide - " + tutorialtexts[id].title;
+	document.getElementById("tutorial-text").innerHTML = tutorialtexts[id].text;
+	if (p.tutorial == 0) { document.getElementById("tuto-prev").classList.add("btn-disabled"); } else {
+		document.getElementById("tuto-prev").classList.remove("btn-disabled");
 	}
-	if (p.tutorial == 6) { $("#tuto-next").addClass("btn-disabled"); } else {
-		$("#tuto-next").removeClass("btn-disabled");
+	if (p.tutorial == 6) { document.getElementById("tuto-next").classList.add("btn-disabled"); } else {
+		document.getElementById("tuto-next").classList.remove("btn-disabled");
 	}
 }
 
@@ -405,8 +429,8 @@ function showTutorialDIV() {
 }
 
 function MESSAGE(title, message) {
-	$("#message-title").html(title);
-	$("#message-text").html(message);
+	document.getElementById("message-title").innerHTML = title;
+	document.getElementById("message-text").innerHTML = message;
 	document.getElementById('modal-1').showModal();
 }
 

@@ -49,7 +49,7 @@ const DEFAULT = {
 
 let p = DEFAULT; 
 
-$(document).ready(function () {
+document.addEventListener("DOMContentLoaded", function () {
 	if (localStorage.getItem("idleSA1") != null) load();
 	setInterval(function () {
 		idleFiveLoop();
@@ -112,7 +112,7 @@ function idleFiveLoop() {
 	p.stats.character_totalcash += getCashPS();
 	if (p.fl == 1) showTutorialDIV();
 	if (notify_time > 0) notify_time--;
-	else $("#announce").hide();
+	else document.getElementById("announce").style.display = 'none';
 	if (p.quest.progression == undefined) p.quest.progression = 0;
 	p.points = Math.round(p.points * 100) / 100;
 	UpdateUI();
@@ -302,8 +302,8 @@ function genGun2() {
 }
 
 function ALERT(text, seconds) {
-	$("#announce-text").html(text);
-	$("#announce").show();
+	document.getElementById("announce-text").innerHTML = text;
+	document.getElementById("announce").style.display = 'block';
 	notify_time = seconds;
 }
 
