@@ -16,32 +16,34 @@ This document outlines the planned update schedule, transitioning the game from 
   - [x] Analyze `BigNumber` growth curves.
   - [x] Adjust `cost_scale` in `js/data.js` to smooth the Mid-game to Late-game transition.
 - **UI Polish:**
-  - [ ] Refactor CSS for better mobile responsiveness.
+  - [x] Refactor CSS for better mobile responsiveness.
   - [x] **Framework Decision:** Selected **Tailwind CSS**.
   - [x] **Component Library:** Selected **DaisyUI**.
   - [x] **Build Setup:** Configured Tailwind + DaisyUI build pipeline.
   - [x] **Implementation:** Convert Mission/Weapon lists from Tables to Cards (Option 1).
-  - [ ] Prepare the interface (tabs/layout) for the upcoming Map tab.
+  - [x] Prepare the interface (tabs/layout) for the upcoming Map tab.
 
 ### v1.2: The Provincial Tour (World Expansion Part 1)
 **Goal:** Implement the geographic progression system defined in `MAP.md`.
 - **Map Interface:**
-  - [ ] Create interactive Map UI (SVG or HTML Canvas).
-  - [ ] Implement logic to replace the simple mission list with the Map view.
-  - [ ] Add region selection handlers.
+  - [x] Create interactive Map UI (SVG or HTML Canvas).
+  - [x] Implement logic to replace the simple mission list with the Map view.
+  - [x] Add region selection handlers.
 - **Regional Unlocks (The Interior):**
   - [ ] **Gauteng:** Setup as the starting hub (High risk, high reward).
   - [ ] **Mpumalanga:** Implement "Load Shedding" mechanic (Global income fluctuation timer).
   - [ ] **Limpopo:** Implement "Border Control" mechanic (RNG risk on specific missions).
   - [ ] **North West:** Implement "Zama Zama" mechanic (Collapse risk vs massive payout).
 - **Visual Progression:**
-  - [ ] Implement dynamic background changing based on the highest unlocked region.
+  - [x] Implement dynamic background changing based on the highest unlocked region.
 
 ### v1.3: The Coast & The Law (World Expansion Part 2)
 **Goal:** Complete the South African journey and introduce risk management.
 - **Regional Unlocks (The Coast):**
   - [ ] **Free State:** Implement "Harvest Season" (Seasonal income boosts).
+  - [ ] **Northern Cape:** Implement "Isolation" mechanic (Lower heat, higher costs).
   - [ ] **KwaZulu-Natal:** Implement "Shipping Routes" (Bulk periodic cash delivery).
+  - [ ] **Eastern Cape:** Implement "Strike Action" mechanic (Production halts vs future boosts).
   - [ ] **Western Cape:** Implement "Turf Control" passive income scaling.
 - **Heat System:**
   - [ ] Add `Heat` variable to game state.

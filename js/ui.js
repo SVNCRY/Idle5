@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿let activeRegion = null;
+﻿﻿﻿let activeRegion = null;
 let lastBackgroundId = -1;
 
 function openRegion(id) {
@@ -128,32 +128,46 @@ function UpdateTexts() {
 //MISSIONS TABLE
 function MissionList() {
 	document.getElementById('missions').innerHTML = "";
+	// Refactor CSS: Use Grid for responsive layout (1 col mobile, 2 col tablet, 3 col desktop)
+	document.getElementById('missions').className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4";
 
 	if (activeRegion === null) {
-		// Render Regions Map (List View)
+		// Render Interactive Map UI (SVG)
+		// We render the map in a full-width container spanning all grid columns
+		const mapContainer = document.createElement('div');
+		mapContainer.className = "col-span-1 md:col-span-2 lg:col-span-3 w-full";
+		mapContainer.innerHTML = renderWorldMap();
+		document.getElementById('missions').appendChild(mapContainer);
+
+		// Render Regions List (Cards) below map for accessibility/details
 		for (const id in regions) {
 			const r = regions[id];
 			const unlocked = isRegionUnlocked(id);
 			const progress = getRegionUnlockProgress(id);
 			
 			let clickAction = unlocked ? `openRegion(${id})` : "";
-			let cardClass = unlocked ? "bg-base-200 cursor-pointer hover:bg-base-300" : "bg-base-200 opacity-70";
+			let cardClass = unlocked ? "bg-base-200 cursor-pointer hover:bg-base-300 transition-all" : "bg-base-200 opacity-70";
 			let badge = unlocked ? `<div class="badge badge-success">Unlocked</div>` : `<div class="badge badge-warning">Locked</div>`;
 			
 			let progressBar = "";
 			if (!unlocked) {
 				 progressBar = `<div class="mt-2" id="region-locked-content-${id}">
-									<progress id="region-progress-${id}" class="progress progress-warning w-full" value="${progress}" max="100"></progress>
+									<progress id="region-progress-${id}" class="progress progress-warning w-full" value="${progress}" max="100">Rank ${p.rank} / ${r.reqRank}</progress>
 									<div class="text-xs mt-1">Rank ${p.rank} / ${r.reqRank}</div>
 								</div>`;
 			}
 
 			const CONTENT = `
-			<div class="card ${cardClass} shadow-xl mb-4" onclick="${clickAction}" id="region-card-${id}">
+			<div class="card ${cardClass} shadow-xl" onclick="${clickAction}" id="region-card-${id}">
 				<div class="card-body p-4">
-					<h2 class="card-title text-lg">${r.name} ${badge}</h2>
-					<p class="text-sm">${r.subtitle}</p>
-					<p class="text-xs italic opacity-70">${r.focus}</p>
+					<div class="flex justify-between items-start">
+						<div>
+							<h2 class="card-title text-lg">${r.name}</h2>
+							<p class="text-xs italic opacity-70">${r.focus}</p>
+						</div>
+						${badge}
+					</div>
+					<p class="text-sm mt-2">${r.subtitle}</p>
 					${progressBar}
 				</div>
 			</div>`;
@@ -162,23 +176,31 @@ function MissionList() {
 		
 		const nextRegion = getNextRegionToUnlock();
 		const msg = nextRegion ? `Next region: ${nextRegion.name} at Rank ${nextRegion.reqRank}` : "All regions unlocked!";
-		document.getElementById("tab2").insertAdjacentHTML('beforeend', `<div id='NextUnlockInfo' class='alert alert-info mt-4'>${msg}</div>`);
+		
+		// Ensure the info alert spans full width
+		const infoDiv = document.createElement('div');
+		infoDiv.className = "col-span-1 md:col-span-2 lg:col-span-3";
+		infoDiv.innerHTML = `<div id='NextUnlockInfo' class='alert alert-info mt-4'>${msg}</div>`;
+		document.getElementById('missions').appendChild(infoDiv);
 
 	} else {
 		// Render Missions for Active Region
 		const regionName = regions[activeRegion].name;
-		document.getElementById('missions').insertAdjacentHTML('beforeend', `
-			<div class="flex justify-between items-center mb-4">
+		
+		// Header spans full width
+		const headerDiv = document.createElement('div');
+		headerDiv.className = "col-span-1 md:col-span-2 lg:col-span-3";
+		headerDiv.innerHTML = `<div class="flex justify-between items-center mb-4">
 				<h2 class="text-xl font-bold">${regionName}</h2>
 				<button class="btn btn-sm btn-neutral" onclick="closeRegion()">Back to Map</button>
-			</div>
-		`);
+			</div>`;
+		document.getElementById('missions').appendChild(headerDiv);
 
 		for (const i in missions) {
 			if (missions[i].regionId !== activeRegion) continue;
 
 			const CONTENT = `
-				<div class="card bg-base-200 shadow-xl mb-2" id="mission-${i}">
+				<div class="card bg-base-200 shadow-xl" id="mission-${i}">
 					<div class="card-body p-4">
 						<h3 class="card-title text-base">${missions[i].name}</h3>
 						<div class="text-xs text-base-content/70">
@@ -206,7 +228,12 @@ function MissionList() {
 			document.getElementById('missions').insertAdjacentHTML('beforeend', CONTENT);
 			if (p.rank >= missions[i].level) document.getElementById("mission-" + i).style.display = ''; else document.getElementById("mission-" + i).style.display = 'none';
 		}
-		document.getElementById("tab2").insertAdjacentHTML('beforeend', `<div id='NextMissionUnlock' class='alert alert-warning mt-4'>Next mission unlocks at rank 0</div>`);
+		
+		const footerDiv = document.createElement('div');
+		footerDiv.className = "col-span-1 md:col-span-2 lg:col-span-3";
+		footerDiv.innerHTML = `<div id='NextMissionUnlock' class='alert alert-warning mt-4'>Next mission unlocks at rank 0</div>`;
+		document.getElementById('missions').appendChild(footerDiv);
+
 		if (getLatestUnlockedMissionId("latest") === "allUnlocked") document.getElementById("NextMissionUnlock").style.display = 'none'; else document.getElementById("NextMissionUnlock").style.display = '';
 	}
 }
@@ -229,7 +256,8 @@ function UpdateMissionsDiv(i) {
 	document.getElementById("mission-" + i + "-next").innerHTML = getNextMilestone(p.missions[i]);
 	document.getElementById("mission-" + i + "-value").innerHTML = "Cost: R " + fix(GetMissionPrice(i, 1), 1);
 	
-	const prodVal = (missions[i].value * p.missions[i]) * (p.prestige.bonus + (p.prestige.multipliers[0] * 0.1));
+	const milestoneBonus = getMilestoneBonus(p.missions[i]);
+	const prodVal = (missions[i].value * p.missions[i] * milestoneBonus) * (p.prestige.bonus + (p.prestige.multipliers[0] * 0.1));
 	document.getElementById("mission-" + i + "-production").innerHTML = "R " + fix(prodVal, 1) + "/s";
 
 	document.getElementById("mission-" + i + "-btnB1").disabled = GetMissionPrice(i, 1) > p.cash;
@@ -263,6 +291,72 @@ function UpdateMap() {
 			return;
 		}
 	}
+}
+
+/**
+ * Renders a schematic SVG map of South Africa's provinces.
+ * Nodes represent provinces, lines represent adjacency/progression.
+ */
+function renderWorldMap() {
+	// Schematic coordinates (0-100 grid)
+	const coords = {
+		2: { x: 50, y: 10, label: "LP" },  // Limpopo (Top)
+		3: { x: 25, y: 30, label: "NW" },  // North West (Top Left)
+		0: { x: 50, y: 30, label: "GP" },  // Gauteng (Center Top)
+		1: { x: 75, y: 30, label: "MP" },  // Mpumalanga (Top Right)
+		5: { x: 20, y: 60, label: "NC" },  // Northern Cape (Mid Left)
+		4: { x: 50, y: 50, label: "FS" },  // Free State (Center)
+		6: { x: 80, y: 60, label: "KZN" }, // KZN (Mid Right)
+		8: { x: 30, y: 90, label: "WC" },  // Western Cape (Bottom Left)
+		7: { x: 70, y: 90, label: "EC" },  // Eastern Cape (Bottom Right)
+		9: { x: 50, y: 5, label: "AFR" }   // Africa (Kingpin) - Hidden/Special
+	};
+
+	// Connections based on MAP.md progression
+	const connections = [
+		[0, 1], [0, 3], [0, 4], // GP -> MP, NW, FS
+		[1, 2], [1, 6],         // MP -> LP, KZN
+		[2, 3],                 // LP -> NW
+		[3, 4], [3, 5],         // NW -> FS, NC
+		[4, 6], [4, 7], [4, 5], // FS -> KZN, EC, NC
+		[5, 8],                 // NC -> WC
+		[6, 7],                 // KZN -> EC
+		[7, 8]                  // EC -> WC
+	];
+
+	let svgContent = `<svg viewBox="0 0 100 100" class="w-full h-64 md:h-96 bg-base-300 rounded-xl shadow-inner mb-4">`;
+	
+	// Draw Connections
+	connections.forEach(([start, end]) => {
+		if (coords[start] && coords[end]) {
+			const unlocked = isRegionUnlocked(start) && isRegionUnlocked(end);
+			const stroke = unlocked ? "#4ade80" : "#4b5563"; // green-400 : gray-600
+			const width = unlocked ? "1" : "0.5";
+			svgContent += `<line x1="${coords[start].x}" y1="${coords[start].y}" x2="${coords[end].x}" y2="${coords[end].y}" stroke="${stroke}" stroke-width="${width}" />`;
+		}
+	});
+
+	// Draw Nodes
+	for (const id in coords) {
+		if (id == 9) continue; // Skip Kingpin for now
+		const c = coords[id];
+		const unlocked = isRegionUnlocked(id);
+		const next = !unlocked && getNextRegionToUnlock() && getNextRegionToUnlock().id == id;
+		
+		let fill = unlocked ? "#22c55e" : "#374151"; // green-500 : gray-700
+		if (next) fill = "#eab308"; // yellow-500
+		
+		const cursor = unlocked ? "cursor-pointer hover:opacity-80" : "cursor-not-allowed";
+		const action = unlocked ? `onclick="openRegion(${id})"` : "";
+
+		svgContent += `<g class="${cursor}" ${action}>
+			<circle cx="${c.x}" cy="${c.y}" r="6" fill="${fill}" stroke="#1f2937" stroke-width="1" />
+			<text x="${c.x}" y="${c.y}" dy="2" text-anchor="middle" font-size="4" fill="white" font-weight="bold" pointer-events="none">${c.label}</text>
+		</g>`;
+	}
+
+	svgContent += `</svg>`;
+	return svgContent;
 }
 
 function UpdateBackground() {
