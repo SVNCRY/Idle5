@@ -1,11 +1,12 @@
 <html>
 
 <head>
-    <title>Mzazsi Crime Idle is loading..</title>
+    <title>Mzansi Crime Idle</title>
     <meta charset="UTF-8" name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' />
     <link rel="shortcut icon" type="image/x-icon" href="images/fav.ico" />
     <link rel="preconnect" href="https://site-assets.fontawesome.com" crossorigin>
     <link rel="stylesheet" type="text/css" href="https://site-assets.fontawesome.com/releases/v7.1.0/css/all.css">
+    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="style.css" />
     
     <!-- Tailwind CSS & DaisyUI via CDN (No build step required) -->
@@ -16,28 +17,17 @@
             theme: {
                 extend: {
                     colors: {
-                        'immo': '#111722',
-                        'immo-surface': '#151b2b',
-                        'immo-card': '#191f2c',
-                        'immo-lighter': '#1c212c',
-                        'quality-standard-text': '#d1d5db',
-                        'quality-standard-border': '#37415166',
-                        'quality-standard-background': '#161d2a',
-                        'quality-refined-text': '#4d76d6',
-                        'quality-refined-border': '#4d76d64d',
-                        'quality-refined-background': '#152951',
-                        'quality-premium-text': '#1fd60b',
-                        'quality-premium-border': '#1fd60b4d',
-                        'quality-premium-background': '#16382b',
-                        'quality-epic-text': '#c0392b',
-                        'quality-epic-border': '#c0392b4d',
-                        'quality-epic-background': '#421d25',
-                        'quality-legendary-text': '#f7bd1e',
-                        'quality-legendary-border': '#f7bd1e4d',
-                        'quality-legendary-background': '#3d3222',
+                        mzansi: {
+                            bg: '#1a1a1a',
+                            surface: '#262626',
+                            gold: '#FFD700',
+                            red: '#ef4444',
+                            green: '#39ff14',
+                        }
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
+                        display: ['Black Ops One', 'cursive'],
                     },
                     animation: {
                         float: 'float 6s ease-in-out infinite',
@@ -48,145 +38,105 @@
                 themes: [
                     {
                         mzansi: {
-                            "primary": "#4f46e5",
-                            "secondary": "#eab308",
-                            "accent": "#22c55e",
-                            "neutral": "#111827",
-                            "base-100": "#111722",
-                            "base-200": "#191f2c",
-                            "base-300": "#374151",
+                            "primary": "#FFD700",
+                            "secondary": "#ef4444",
+                            "accent": "#39ff14",
+                            "neutral": "#262626",
+                            "base-100": "#1a1a1a",
+                            "base-200": "#141414",
+                            "base-300": "#0a0a0a",
+                            "info": "#3abff8",
+                            "success": "#36d399",
+                            "warning": "#fbbd23",
+                            "error": "#f87272",
                         },
                     },
-                    "dark",
                 ],
             },
         }
     </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-        
         body {
             font-family: 'Inter', sans-serif;
         }
-        
-        /* Markdown styles */
-        .markdown { color: #9ca3af; line-height: 2; }
-        .markdown h1, .markdown h2, .markdown h3 { color: #e5e7eb; font-weight: 700; margin: 1rem 0; }
-        .markdown h1 { font-size: 1.5rem; }
-        .markdown h2 { font-size: 1.25rem; }
-        .markdown a { color: #e5e7eb; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 4px; }
-        .markdown a:hover { color: #facc15; }
-        .markdown ul, .markdown ol { padding-left: 2rem; list-style: disc; }
-        .markdown li { color: #d1d5db; }
+        h1, h2, h3, .font-display {
+            font-family: 'Black Ops One', cursive;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #1a1a1a; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #FFD700; }
     </style>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 
-<body data-theme="mzansi" class="select-none overflow-x-hidden bg-base-100 text-base-content">
-    <div x-data="{ menuOpen: false }">
-        <!-- Mobile menu overlay -->
-        <div x-show="menuOpen" @click="menuOpen = false" x-transition:enter="transition-opacity ease-linear duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition-opacity ease-linear duration-300" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="fixed inset-0 bg-gray-900/80 z-40 lg:hidden" style="display:none;"></div>
+<body data-theme="mzansi" class="bg-base-100 text-base-content overflow-hidden select-none font-sans h-[100dvh] flex flex-col">
 
-        <!-- Sidebar -->
-        <aside class="fixed inset-y-0 z-50 flex w-72 flex-col bg-base-200 transition-transform duration-300 ease-in-out left-0 lg:left-0 -translate-x-full lg:translate-x-0" :class="{ '!translate-x-0': menuOpen }">
-            <div class="flex grow flex-col gap-y-5 overflow-y-auto px-6 pb-4">
-                <div class="flex h-16 shrink-0 items-center gap-2">
-                    <i class="fa-duotone fa-solid fa-circle-dollar text-success text-3xl"></i>
-                    <h1 class="text-2xl font-bold">Mzansi Crime</h1>
-                </div>
-                <nav class="flex flex-1 flex-col">
-                    <ul role="list" class="flex flex-1 flex-col gap-y-7" id="game-menu">
-                        <li>
-                            <ul role="list" class="-mx-2 space-y-1">
-                                <li><a data-id="2" class="btn btn-ghost justify-start w-full text-base-content hover:bg-base-300"><i class="fa-solid fa-dollar-sign w-6"></i> Missions</a></li>
-                                <li><a data-id="1" class="btn btn-ghost justify-start w-full text-base-content hover:bg-base-300"><i class="fa-thin fa-crosshairs-simple w-6"></i> Weapons</a></li>
-                                <li><a data-id="3" class="btn btn-ghost justify-start w-full text-base-content hover:bg-base-300"><i class="fa-solid fa-user w-6"></i> Character</a></li>
-                                <li><a data-id="4" class="btn btn-ghost justify-start w-full text-base-content hover:bg-base-300"><i class="fa-solid fa-chart-bar w-6"></i> Stats</a></li>
-                                <li><a data-id="5" class="btn btn-ghost justify-start w-full text-base-content hover:bg-base-300"><i class="fa-sharp fa-solid fa-award w-6"></i> Achievements</a></li>
-                            </ul>
-                        </li>
-                        <li class="mt-auto">
-                            <a data-id="0" class="btn btn-ghost justify-start w-full text-base-content hover:bg-base-300"><i class="fa-solid fa-bars w-6"></i> Menu</a>
-                        </li>
-                    </ul>
-                </nav>
+    <!-- TOP BAR (HUD) -->
+    <header class="navbar bg-base-200/90 backdrop-blur-md border-b border-white/5 z-50 h-16 shrink-0 px-4 gap-4">
+        <div class="flex-none">
+            <div class="flex items-center gap-2 bg-base-300 px-3 py-1 rounded-full border border-white/10">
+                <i class="fa-solid fa-user-secret text-primary"></i>
+                <span id="status_level" class="font-display text-sm tracking-wider">TSOTSI</span>
             </div>
-        </aside>
+        </div>
+        <div class="flex-1 flex justify-center">
+            <div class="flex flex-col items-center">
+                <span id="status_cash" class="font-display text-2xl text-primary drop-shadow-md">R 0</span>
+                <span class="text-[10px] text-accent font-mono tracking-widest uppercase">NET: R 0/s</span>
+            </div>
+        </div>
+        <div class="flex-none">
+            <div class="flex gap-1 text-secondary" id="heat-meter">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-regular fa-star"></i>
+                <i class="fa-regular fa-star"></i>
+            </div>
+        </div>
+    </header>
 
-        <!-- Mobile menu button -->
-        <button @click="menuOpen = true" class="fixed z-30 lg:hidden p-3 bg-base-300 border border-gray-700/40 rounded-full text-gray-400 hover:text-white hover:bg-gray-800 transition-colors shadow-lg top-4 left-4">
-            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-        </button>
-
-        <main class="lg:pl-72">
-            <!-- Top bar for currencies -->
-            <div class="sticky top-0 z-30 flex h-16 shrink-0 items-center gap-x-4 border-b border-base-300 bg-base-100 px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8">
-                <div class="flex flex-1 gap-x-4 self-stretch lg:gap-x-6 justify-end">
-                    <div class="flex items-center gap-x-4 lg:gap-x-6">
-                        <div class="flex items-center px-4 py-2 text-sm font-bold bg-base-200 rounded-full whitespace-nowrap">
-                            <span class="flex-shrink-0 mr-2 text-success"><i class="fa-duotone fa-solid fa-circle-dollar"></i></span>
-                            <span id="status_cash">0</span>
+    <!-- MAIN CONTENT (Scrollable) -->
+    <main class="flex-1 overflow-y-auto relative scroll-smooth bg-base-100" id="main-viewport">
+        <!-- Dynamic Background Layer -->
+        <div id="dynamic-bg" class="fixed inset-0 z-0 opacity-20 pointer-events-none bg-cover bg-center transition-all duration-1000" style="background-image: url('images/bg.webp');"></div>
+        
+        <!-- Content Container -->
+        <div class="relative z-10 container mx-auto p-4 pb-24 max-w-md md:max-w-2xl lg:max-w-4xl">
+            
+            <!-- TAB 1: HUSTLE (Active + Weapons) -->
+            <div id="tab1" class="view-section flex flex-col gap-6">
+                
+                <!-- Active Clicker Area -->
+                <div class="card bg-base-200/80 backdrop-blur-sm border border-white/5 shadow-xl">
+                    <div class="card-body items-center text-center p-6">
+                        <h2 class="card-title font-display text-2xl mb-4 text-white">ACTIVE HUSTLE</h2>
+                        
+                        <!-- Weapon Click Target -->
+                        <div id="imagecontainer" class="relative group cursor-pointer active:scale-95 transition-transform duration-100">
+                            <div id="imagecash" class="w-48 h-48 bg-contain bg-no-repeat bg-center drop-shadow-2xl filter group-hover:brightness-110"></div>
+                            <!-- Floating text container would go here -->
                         </div>
-                         <div class="flex items-center px-4 py-2 text-sm font-bold bg-base-200 rounded-full whitespace-nowrap">
-                            <span class="flex-shrink-0 mr-2 text-warning"><i class='fa-light fa-coin'></i></span>
-                            <span id="status_points">0</span>
+
+                        <!-- Stats -->
+                        <div class="stats stats-vertical lg:stats-horizontal shadow bg-base-300/50 mt-6 w-full border border-white/5">
+                            <div class="stat place-items-center py-2">
+                                <div class="stat-title text-xs uppercase tracking-widest">Weapon</div>
+                                <div class="stat-value text-lg font-display text-primary" id="status_weapon">Fists</div>
+                            </div>
+                            <div class="stat place-items-center py-2">
+                                <div class="stat-title text-xs uppercase tracking-widest">Damage</div>
+                                <div class="stat-value text-lg font-display text-secondary" id="status_damage">1</div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="p-4 sm:p-6 lg:p-8">
-                <!--COLUMNS-->
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    <!--LEFT COLUMN-->
-                    <div class="lg:col-span-1 flex flex-col gap-4" id="colonne-m">
-                        <!--CURRENT WEAPON-->
-                        <div class="card bg-base-200 shadow-xl">
-                            <div class="card-body items-center text-center p-4">
-                                <div id="imagecontainer" class="mt-2">
-                                    <div id="imagecash"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--GAME INFOS-->
-                        <div class="card bg-base-200 shadow-xl p-4">
-                            <div id="status" class="grid grid-cols-4 gap-2 text-sm mb-4">
-                                <div class="font-bold text-neutral-content">Weapon</div>
-                                <div class="col-span-3 text-right font-bold" id="status_weapon"></div>
-                                
-                                <div class="font-bold text-error">Damage</div>
-                                <div class="col-span-3 text-right font-bold" id="status_damage"></div>
-                                
-                                <div class="font-bold text-info">Rank</div>
-                                <div class="col-span-3 text-right" id="status_level"></div>
-                            </div>
-
-                            <div class="divider font-bold text-lg">Current Objective</div>
-
-                            <div class="flex flex-col gap-2 text-center">
-                                <span id="objective" class="text-lg"></span>
-                                <h3 class="text-warning font-bold" id="quest_rewards"></h3>
-                                <button id="ChangeObjective" class="btn btn-outline btn-success w-full mt-2">
-                                    New objective for <span class="text-warning ml-1"><i class='fa-light fa-coin'></i> 0.5</span>
-                                </button>
-                            </div>
-                            
-                            <div class="divider"></div>
-                            <div class="text-center">
-                                <div id="messages"></div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!--RIGHT COLUMN-->
-                    <div class="lg:col-span-2" id="colonne-d">
-                        <!--WEAPONS-->
-                        <div id="tab1" style="display: none; width: 100%;">
-
-                            <div name="weap-type" class="tabs tabs-boxed justify-center mb-4 bg-base-200" id="weap-select">
+                <!-- Weapons Shop -->
+                <div class="flex flex-col gap-4">
+                    <div class="divider font-display text-white/50">BLACK MARKET</div>
+                    
+                    <!-- Weapon Type Tabs -->
+                    <div name="weap-type" class="tabs tabs-boxed justify-center bg-base-200 p-1" id="weap-select">
                                 <a id="W1" class="tab tab-active" data-id="1"></a>
                                 <a id="W2" class="tab" data-id="2"></a>
                                 <a id="W3" class="tab" data-id="3"></a>
@@ -195,10 +145,10 @@
                                 <a id="W6" class="tab" data-id="6"></a>
                                 <a id="W7" class="tab" data-id="7"></a>
                                 <a id="W8" class="tab" data-id="8"></a>
-                            </div>
+                    </div>
 
-                            <div id="Wtab1" class="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
-                            <div id="Wtab2" class="grid grid-cols-1 sm:grid-cols-2 gap-4" style="display: none;"></div>
+                    <div id="Wtab1" class="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
+                    <div id="Wtab2" class="grid grid-cols-1 sm:grid-cols-2 gap-4" style="display: none;"></div>
                             <div id="Wtab3" class="grid grid-cols-1 sm:grid-cols-2 gap-4" style="display: none;"></div>
                             <div id="Wtab4" class="grid grid-cols-1 sm:grid-cols-2 gap-4" style="display: none;"></div>
                             <div id="Wtab5" class="grid grid-cols-1 sm:grid-cols-2 gap-4" style="display: none;"></div>
@@ -206,17 +156,21 @@
                             <div id="Wtab7" class="grid grid-cols-1 sm:grid-cols-2 gap-4" style="display: none;"></div>
                             <div id="Wtab8" class="grid grid-cols-1 sm:grid-cols-2 gap-4" style="display: none;"></div>
                         </div>
+            </div>
 
-                        <!--MISSIONS-->
-                        <div id="tab2" style="display: block; width: 100%;">
-                            <div id="missions" class="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
-                        </div>
+            <!-- TAB 2: RACKETS (Missions & Map) -->
+            <div id="tab2" class="view-section hidden w-full">
+                <div id="missions" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+            </div>
 
-                        <!--VEHICLES-->
-                        <div id="tab3" style="display: none; width: 100%;">
-
-                            <div class="card bg-base-200 shadow-xl p-4 mb-4">
-                                <div class="flex flex-col gap-2">
+            <!-- TAB 3: EMPIRE (Prestige/Upgrades) -->
+            <div id="tab3" class="view-section hidden w-full">
+                <div class="flex flex-col gap-6">
+                    <!-- Prestige Header -->
+                    <div class="card bg-gradient-to-br from-primary/10 to-base-200 border border-primary/20 shadow-xl">
+                        <div class="card-body">
+                            <h2 class="card-title font-display text-primary"><i class="fa-solid fa-crown"></i> EMPIRE STATUS</h2>
+                            <div class="grid grid-cols-2 gap-4 text-sm opacity-80">
                                     <div id="character-number"></div>
                                     <div id="prestigecount"></div>
                                     <div id="character-text1"></div>
@@ -225,24 +179,30 @@
                                     <div class="tc-dollar" id="prestigepricecount2"></div>
                                     <div id="character-text3"></div>
                                     <div id="character-text4"></div>
-                                    <div id="character-text5"></div>
-                                </div>
+                                <div id="character-text5" class="col-span-2"></div>
                             </div>
-                            <div class="card bg-base-200 shadow-xl p-4 mb-4">
-                                <div class="flex gap-4 justify-center">
-                                    <div id="btnReasign" onClick="ReasignPoints();" class="btn btn-info">Reasign Points </div>
-                                    <div id="btnPrestige" onClick="AddPrestige();" class="btn btn-success btn-outline">
-                                    <i class="checkmark icon"></i>Change Character
-                                    </div>
-                                </div>
+                            <div class="card-actions justify-end mt-4">
+                                <button id="btnReasign" onClick="ReasignPoints();" class="btn btn-sm btn-ghost">Reset Points</button>
+                                <button id="btnPrestige" onClick="AddPrestige();" class="btn btn-sm btn-primary">PRESTIGE NOW</button>
                             </div>
-
-                            <table id="Vtab" class="table w-full"></table>
                         </div>
+                    </div>
 
-                        <!--STATS-->
-                        <div id="tab4" style="display: none; width: 100%;">
-                            <div class="card bg-base-200 shadow-xl p-4">
+                    <!-- Upgrades List -->
+                    <div class="overflow-x-auto bg-base-200 rounded-lg border border-white/5">
+                        <table id="Vtab" class="table table-zebra w-full"></table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 4: MENU (Stats & Settings) -->
+            <div id="tab4" class="view-section hidden w-full">
+                <div class="flex flex-col gap-6">
+                    
+                    <!-- Stats Card -->
+                    <div class="card bg-base-200 shadow-xl border border-white/5">
+                        <div class="card-body p-4">
+                            <h2 class="card-title font-display text-lg mb-4">STATISTICS</h2>
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div>
                                         <div class="divider font-bold text-sm">GENERAL</div>
@@ -303,12 +263,14 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                    </div>
 
-                        <!--ACHIEVEMENTS-->
-                        <div id="tab5" style="display: none; width: 100%;">
-                            <div class="card bg-base-200 shadow-xl p-4">
-                                <div id="successtype" class="tabs tabs-boxed justify-center mb-4 bg-base-300">
+                    <!-- Achievements Card -->
+                    <div class="card bg-base-200 shadow-xl border border-white/5">
+                        <div class="card-body p-4">
+                            <h2 class="card-title font-display text-lg mb-4">ACHIEVEMENTS</h2>
+                            <div id="tab5"> <!-- Keeping ID for JS compatibility -->
+                                <div id="successtype" class="tabs tabs-boxed justify-center mb-4 bg-base-300 p-1">
                                     <button id="succcess-btn-0" data-id="0" class="tab tab-active">Player</button>
                                     <button id="succcess-btn-1" data-id="1" class="tab">Cash</button>
                                     <button id="succcess-btn-2" data-id="2" class="tab">Missions</button>
@@ -322,13 +284,52 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Settings / Save -->
+                    <div class="card bg-base-200 shadow-xl border border-white/5">
+                        <div class="card-body p-4">
+                            <h2 class="card-title font-display text-lg mb-4">SYSTEM</h2>
+                            <div class="grid grid-cols-2 gap-4">
+                                <button onclick="document.getElementById('modal-5').showModal()" class="btn btn-neutral"><i class="fa-solid fa-floppy-disk"></i> Save Manager</button>
+                                <button onclick="showTutorialDIV()" class="btn btn-neutral"><i class="fa-solid fa-circle-question"></i> Tutorial</button>
+                            </div>
+                            <div class="text-center text-xs opacity-50 mt-4" id="version"></div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
-            <div id="announce" class="alert alert-info fixed bottom-4 right-4 w-auto shadow-lg z-50" style="display: none;">
-                <div id="announce-text"></div>
-            </div>
-        </main>
+
+        </div>
+    </main>
+
+    <!-- BOTTOM NAVIGATION -->
+    <div class="btm-nav btm-nav-lg bg-base-200/90 backdrop-blur-md border-t border-white/5 z-50" id="game-menu">
+        <a data-id="1" id="t1" class="active text-primary bg-base-300">
+            <i class="fa-solid fa-hand-fist text-xl"></i>
+            <span class="btm-nav-label text-[10px] font-bold tracking-wider mt-1">HUSTLE</span>
+        </a>
+        <a data-id="2" id="t2" class="text-neutral-content hover:text-white">
+            <i class="fa-solid fa-briefcase text-xl"></i>
+            <span class="btm-nav-label text-[10px] font-bold tracking-wider mt-1">RACKETS</span>
+        </a>
+        <a data-id="3" id="t3" class="text-neutral-content hover:text-white">
+            <i class="fa-solid fa-crown text-xl"></i>
+            <span class="btm-nav-label text-[10px] font-bold tracking-wider mt-1">EMPIRE</span>
+        </a>
+        <a data-id="4" id="t4" class="text-neutral-content hover:text-white">
+            <i class="fa-solid fa-bars text-xl"></i>
+            <span class="btm-nav-label text-[10px] font-bold tracking-wider mt-1">MENU</span>
+        </a>
     </div>
+
+    <!-- TOAST NOTIFICATIONS -->
+    <div id="announce" class="toast toast-top toast-center z-[100]" style="display: none;">
+        <div class="alert alert-info shadow-lg border border-info/20 bg-base-300/90 backdrop-blur">
+                <div id="announce-text"></div>
+        </div>
+    </div>
+
     <!--MENUS-->
     <dialog id="modal-1" class="modal">
         <div class="modal-box">
@@ -343,6 +344,9 @@
                 </form>
             </div>
         </div>
+        <form method="dialog" class="modal-backdrop">
+            <button>close</button>
+        </form>
     </dialog>
 
     <!--UNUSED-->
@@ -364,6 +368,9 @@
                 <button onclick="closeTutorial();" class="btn btn-error btn-outline">Close</button>
             </div>
         </div>
+        <form method="dialog" class="modal-backdrop">
+            <button>close</button>
+        </form>
     </dialog>
 
     <!--SAVE-->
@@ -388,6 +395,9 @@
                 <button onclick="hideMenus();" class="btn btn-ghost w-full">Close</button>
             </div>
         </div>
+        <form method="dialog" class="modal-backdrop">
+            <button>close</button>
+        </form>
     </dialog>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
@@ -396,6 +406,7 @@
     <script type="text/javascript" src="DATA/numeral.min.js"></script>
     <script type="text/javascript" src="js/utils.js"></script>
     <script type="text/javascript" src="js/data.js"></script>
+    <script type="text/javascript" src="js/map.js"></script>
     <script type="text/javascript" src="js/core.js"></script>
     <script type="text/javascript" src="js/ui.js"></script>
 </body>

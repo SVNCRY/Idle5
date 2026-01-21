@@ -82,9 +82,12 @@ Reintroduce a mechanic inspired by the original GTA theme but adapted for Idle.
   - Passive: Buy "Legal Fronts" (Car Washes, Shisanyamas) to launder money and lower Heat.
 
 ## 3. Asset & UI Updates
-- **Map Interface:** Replace the simple list tab with a stylized map of SA. Clicking a province opens the mission list for that area.
-- **UI Redesign:** Move from data tables to a Card-based interface
-- **Visual Progression:** The background image (`images/bg.webp`) should change based on the highest unlocked region (e.g., Table Mountain for WC, Ponte Tower for Gauteng).
+> **Detailed Plan:** See UI_OVERHAUL_PLAN.md for the complete visual redesign strategy.
+
+- **Architecture:** Shift to a Mobile-First "App" layout with Bottom Navigation.
+- **Components:** Implement DaisyUI Cards for Missions and Weapons.
+- **Map Interface:** Interactive SVG map of SA.
+- **Visual Progression:** Dynamic backgrounds based on the active Province.
 
 ## 4. Platform Strategy
 **Goal:** Make the game accessible on all devices via Progressive Web App (PWA) standards and native wrappers.

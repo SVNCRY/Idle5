@@ -1,4 +1,4 @@
-﻿﻿﻿let activeRegion = null;
+﻿﻿let activeRegion = null;
 let lastBackgroundId = -1;
 
 function openRegion(id) {
@@ -474,7 +474,7 @@ function VehicleList() {
 
 function btnPrestigeD() { document.getElementById("btnPrestige").classList.add("btn-disabled"); }
 function btnPrestigeE() { document.getElementById("btnPrestige").classList.remove("btn-disabled"); }
-function hideTabs() { for (let id = 1; id < 6; id++) { document.getElementById("tab" + id).style.display = 'none'; document.getElementById("t" + id).classList.remove("btn-active", "text-warning"); } }
+function hideTabs() { for (let id = 1; id < 6; id++) { if(document.getElementById("tab" + id)) document.getElementById("tab" + id).style.display = 'none'; if(document.getElementById("t" + id)) document.getElementById("t" + id).classList.remove("active", "text-primary", "bg-base-300"); } }
 function hideMenus() { for (let id = 1; id < 6; id++) { document.getElementById('modal-' + id).close(); } }
 function hideWTabs() { for (let id = 0; id < 10; id++) { if(document.getElementById('Wtab' + id)) document.getElementById('Wtab' + id).style.display = 'none'; if(document.getElementById("W" + id)) document.getElementById("W" + id).classList.remove('tab-active'); } }
 function hideSTabs() { for (let id = 0; id < 10; id++) { if(document.getElementById('Stab' + id)) document.getElementById('Stab' + id).style.display = 'none'; if(document.getElementById("succcess-btn-" + id)) document.getElementById("succcess-btn-" + id).classList.remove('tab-active'); } }
@@ -486,42 +486,10 @@ function ClickEvents() {
 			const id = target.dataset.id;
 			hideTabs();
 			document.getElementById("tab" + id).style.display = '';
-			document.getElementById("t" + id).classList.add("btn-active", "text-warning");
+			document.getElementById("t" + id).classList.add("active", "text-primary", "bg-base-300");
 			if (id == 2) MissionList();
 			UpdateUI();
 			UpdateTabs();
-		}
-	});
-	document.getElementById("sidebar").addEventListener("click", function (e) {
-		const target = e.target.closest("a");
-		if (target) {
-			const id = target.dataset.id;
-			document.getElementById('modal-' + id).showModal();
-			UpdateUI();
-		}
-	});
-	document.getElementById("mobile-bottom-nav").addEventListener("click", function (e) {
-		const target = e.target.closest("button");
-		if (target) {
-			const id = target.dataset.id;
-			if (id == 0) {
-				const sb = document.getElementById("sidebar");
-				sb.classList.toggle("hidden");
-				sb.classList.toggle("flex");
-			} else {
-				hideTabs();
-				document.getElementById("tab" + id).style.display = '';
-				document.querySelectorAll("#mobile-bottom-nav button").forEach(el => {
-					el.classList.remove("active", "text-success", "bg-base-300");
-					el.classList.add("text-neutral-content");
-				});
-				target.classList.remove("text-neutral-content");
-				target.classList.add("active", "text-success", "bg-base-300");
-				document.getElementById("t" + id).classList.add("btn-active", "text-warning");
-				if (id == 2) MissionList();
-				UpdateUI();
-				UpdateTabs();
-			}
 		}
 	});
 	document.getElementById("weap-select").addEventListener("click", function (e) {
@@ -536,13 +504,6 @@ function ClickEvents() {
 		if (p.points >= 0.5) {
 			p.points -= 0.5;
 			NewObjective();
-		}
-	});
-	document.getElementById("top-menu").addEventListener("click", function (e) {
-		if (e.target.closest("#t0")) {
-			const sb = document.getElementById("sidebar");
-			sb.classList.toggle("hidden");
-			sb.classList.toggle("flex");
 		}
 	});
 	document.getElementById("successtype").addEventListener("click", function (e) {
@@ -705,4 +666,25 @@ function countWeaponsByType() {
 	}
 
 	return typeCounts;
+}
+
+function getMilestoneBonus(level) {
+	let bonus = 1;
+	if (level >= 25) bonus *= 2;
+	if (level >= 50) bonus *= 2;
+	if (level >= 100) bonus *= 2;
+	if (level >= 200) bonus *= 2;
+	if (level >= 300) bonus *= 2;
+	if (level >= 400) bonus *= 2;
+	if (level >= 500) bonus *= 2;
+	if (level >= 600) bonus *= 2;
+	return bonus;
+}
+
+function getNextMilestone(level) {
+	if (level < 25) return 25;
+	if (level < 50) return 50;
+	if (level < 100) return 100;
+	if (level < 200) return 200;
+	return Math.ceil((level + 1) / 100) * 100;
 }
