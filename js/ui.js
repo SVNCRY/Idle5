@@ -22,13 +22,13 @@ function UpdateUI() {
 	//LEFT INFOS
 	document.getElementById('imagecash').style.backgroundImage = "url('" + weapons[p.Weapon.Id].img + "')";
 	//document.getElementById("status_cps").innerHTML = ""; unused for now
-	document.getElementById("status_cash").innerHTML = "R " + fix(p.cash, "full") + "<div class='sub header'>+ " + fix(getCashPS(), "full") + " per second</div>";
+	document.getElementById("status_cash").innerHTML = "R " + fix(p.cash, "full") + "<div class='text-xs opacity-60 font-mono uppercase'>+ " + fix(getCashPS(), "full") + "/s</div>";
 	document.getElementById("status_level").innerHTML = getRank(p.rank);
 	document.getElementById("status_weapon").innerHTML = weapons[p.Weapon.Id].name + " " + GenStarLabel(p.Stars[p.Weapon.Id]);
 	document.getElementById("status_weapon").className = 'col-span-3 font-bold flex items-center justify-end gap-2 ' + p.Weapon.Class;
 	document.getElementById("status_damage").className = 'col-span-3 font-bold flex items-center justify-end gap-2 ' + p.Weapon.Class;
 	document.getElementById("status_damage").innerHTML = "<i class='text-error fa-thin fa-crosshairs-simple'></i> " + ClicCashText;
-	document.getElementById("status_points").innerHTML = "<span class='jaune'><i class='fa-light fa-coin'></i> " + fix(p.points, 2) + "</span>";
+	document.getElementById("status_points").innerHTML = "<span class='text-warning font-mono'><i class='fa-light fa-coin'></i> " + fix(p.points, 2) + "</span>";
 	document.getElementById("messages").innerHTML = prestigeText;
 	//CHARACTER
 	document.getElementById("prestigecount").innerHTML = p.prestige.level;
@@ -146,24 +146,24 @@ function MissionList() {
 			const progress = getRegionUnlockProgress(id);
 			
 			let clickAction = unlocked ? `openRegion(${id})` : "";
-			let cardClass = unlocked ? "bg-base-200 cursor-pointer hover:bg-base-300 transition-all" : "bg-base-200 opacity-70";
-			let badge = unlocked ? `<div class="badge badge-success">Unlocked</div>` : `<div class="badge badge-warning">Locked</div>`;
+			let cardClass = unlocked ? "bg-base-300 cursor-pointer hover:bg-base-200 transition-all border border-base-content/20 rounded-sm" : "bg-base-300 opacity-60 border border-base-content/10 rounded-sm grayscale";
+			let badge = unlocked ? `<div class="badge badge-success badge-sm rounded-sm">OPEN</div>` : `<div class="badge badge-ghost badge-sm rounded-sm">LOCKED</div>`;
 			
 			let progressBar = "";
 			if (!unlocked) {
 				 progressBar = `<div class="mt-2" id="region-locked-content-${id}">
-									<progress id="region-progress-${id}" class="progress progress-warning w-full" value="${progress}" max="100">Rank ${p.rank} / ${r.reqRank}</progress>
+									<progress id="region-progress-${id}" class="progress progress-warning w-full h-1 rounded-none" value="${progress}" max="100">Rank ${p.rank} / ${r.reqRank}</progress>
 									<div class="text-xs mt-1">Rank ${p.rank} / ${r.reqRank}</div>
 								</div>`;
 			}
 
 			const CONTENT = `
-			<div class="card ${cardClass} shadow-xl" onclick="${clickAction}" id="region-card-${id}">
-				<div class="card-body p-4">
+			<div class="card ${cardClass} shadow-none" onclick="${clickAction}" id="region-card-${id}">
+				<div class="card-body p-3">
 					<div class="flex justify-between items-start">
 						<div>
-							<h2 class="card-title text-lg">${r.name}</h2>
-							<p class="text-xs italic opacity-70">${r.focus}</p>
+							<h2 class="card-title text-base font-bold uppercase tracking-wide">${r.name}</h2>
+							<p class="text-xs opacity-70 font-mono">${r.focus}</p>
 						</div>
 						${badge}
 					</div>
@@ -200,28 +200,35 @@ function MissionList() {
 			if (missions[i].regionId !== activeRegion) continue;
 
 			const CONTENT = `
-				<div class="card bg-base-200 shadow-xl" id="mission-${i}">
-					<div class="card-body p-4">
-						<h3 class="card-title text-base">${missions[i].name}</h3>
-						<div class="text-xs text-base-content/70">
-							Level <span id="mission-${i}-level">0</span>
-							<span class="float-right">Next x2: <span id="mission-${i}-next" class="text-warning">25</span></span>
+				<div class="card bg-base-300 shadow-none border border-base-content/10 rounded-sm hover:border-base-content/30 transition-colors" id="mission-${i}">
+					<div class="card-body p-3">
+						<div class="flex justify-between items-start mb-2">
+							<h3 class="card-title text-sm font-bold uppercase tracking-wide">${missions[i].name}</h3>
+							<div class="badge badge-neutral rounded-sm font-mono text-xs" id="mission-${i}-level">0</div>
 						</div>
-						<div class="flex justify-between mt-2">
-							<div class="badge badge-neutral" id="mission-${i}-production">R0/s</div>
-							<div class="badge badge-neutral" id="mission-${i}-value">Cost: R0</div>
+						<div class="text-xs text-base-content/60 mb-2 font-mono flex justify-between">
+							<span>Next x2: <span id="mission-${i}-next" class="text-warning">25</span></span>
 						</div>
-						<div class="card-actions justify-center mt-4 flex-col gap-2">
-							<div class="join w-full">
-								<button id="mission-${i}-btnB1" class="btn btn-sm btn-warning join-item flex-1" onClick="BuyM(${i}, 1);">+1</button>
-								<button id="mission-${i}-btnB10" class="btn btn-sm btn-warning join-item flex-1" onClick="BuyM(${i}, 10);">+10</button>
-								<button id="mission-${i}-btnB100" class="btn btn-sm btn-warning join-item flex-1" onClick="BuyM(${i}, 100);">+100</button>
+						<div class="grid grid-cols-2 gap-2 mb-3">
+							<div class="bg-base-200 p-1 rounded-sm text-center border border-base-content/5">
+								<div class="text-[10px] uppercase text-base-content/50">Income</div>
+								<div class="font-bold text-success text-xs" id="mission-${i}-production">R0/s</div>
 							</div>
-							<div class="join w-full">
-								<button id="mission-${i}-btnS1" class="btn btn-sm btn-error btn-outline join-item flex-1" onClick="SellM(${i}, 1);">-1</button>
-								<button id="mission-${i}-btnS10" class="btn btn-sm btn-error btn-outline join-item flex-1" onClick="SellM(${i}, 10);">-10</button>
-								<button id="mission-${i}-btnS100" class="btn btn-sm btn-error btn-outline join-item flex-1" onClick="SellM(${i}, 100);">-100</button>
+							<div class="bg-base-200 p-1 rounded-sm text-center border border-base-content/5">
+								<div class="text-[10px] uppercase text-base-content/50">Cost</div>
+								<div class="font-bold text-warning text-xs" id="mission-${i}-value">R0</div>
 							</div>
+						</div>
+						<div class="card-actions justify-center flex-col gap-1">
+							<div class="join w-full grid grid-cols-3">
+								<button id="mission-${i}-btnB1" class="btn btn-xs btn-warning join-item rounded-none" onClick="BuyM(${i}, 1);">+1</button>
+								<button id="mission-${i}-btnB10" class="btn btn-xs btn-warning join-item rounded-none" onClick="BuyM(${i}, 10);">+10</button>
+								<button id="mission-${i}-btnB100" class="btn btn-xs btn-warning join-item rounded-none" onClick="BuyM(${i}, 100);">+100</button>
+							</div>
+							<div class="join w-full grid grid-cols-3 opacity-50 hover:opacity-100 transition-opacity">
+								<button id="mission-${i}-btnS1" class="btn btn-xs btn-error btn-outline join-item rounded-none" onClick="SellM(${i}, 1);">-1</button>
+								<button id="mission-${i}-btnS10" class="btn btn-xs btn-error btn-outline join-item rounded-none" onClick="SellM(${i}, 10);">-10</button>
+								<button id="mission-${i}-btnS100" class="btn btn-xs btn-error btn-outline join-item rounded-none" onClick="SellM(${i}, 100);">-100</button>
 						</div>
 					</div>
 				</div>`;
@@ -330,7 +337,7 @@ function renderWorldMap() {
 	connections.forEach(([start, end]) => {
 		if (coords[start] && coords[end]) {
 			const unlocked = isRegionUnlocked(start) && isRegionUnlocked(end);
-			const stroke = unlocked ? "#4ade80" : "#4b5563"; // green-400 : gray-600
+			const stroke = unlocked ? "#10b981" : "#374151"; // emerald-500 : gray-700
 			const width = unlocked ? "1" : "0.5";
 			svgContent += `<line x1="${coords[start].x}" y1="${coords[start].y}" x2="${coords[end].x}" y2="${coords[end].y}" stroke="${stroke}" stroke-width="${width}" />`;
 		}
@@ -343,8 +350,8 @@ function renderWorldMap() {
 		const unlocked = isRegionUnlocked(id);
 		const next = !unlocked && getNextRegionToUnlock() && getNextRegionToUnlock().id == id;
 		
-		let fill = unlocked ? "#22c55e" : "#374151"; // green-500 : gray-700
-		if (next) fill = "#eab308"; // yellow-500
+		let fill = unlocked ? "#059669" : "#1f2937"; // emerald-600 : gray-800
+		if (next) fill = "#d97706"; // amber-600
 		
 		const cursor = unlocked ? "cursor-pointer hover:opacity-80" : "cursor-not-allowed";
 		const action = unlocked ? `onclick="openRegion(${id})"` : "";
@@ -378,16 +385,16 @@ function WeaponList() {
 
 	for (const i in weapons) {
 		const CONTENT = `
-            <div class="card bg-base-200 shadow-xl" id="weapon-${i}">
-                <figure class="px-4 pt-4">
-                    <img src="${weapons[i].img}" class="rounded-xl h-32 object-contain bg-base-300 w-full" style="background: #333;">
+            <div class="card bg-base-300 shadow-none border border-base-content/10 rounded-sm" id="weapon-${i}">
+                <figure class="px-3 pt-3">
+                    <img src="${weapons[i].img}" class="rounded-sm h-24 object-contain bg-base-200 w-full p-2" style="background: #1f2937;">
                 </figure>
-                <div class="card-body p-4 items-center text-center">
-                    <h3 class="card-title text-sm" id="weapon-${i}-name">${weapons[i].name}</h3>
-                    <p class="text-xs" id="weapon-${i}-price">R ${weapons[i].price}</p>
+                <div class="card-body p-3 items-center text-center">
+                    <h3 class="card-title text-sm font-bold uppercase" id="weapon-${i}-name">${weapons[i].name}</h3>
+                    <p class="text-xs font-mono" id="weapon-${i}-price">R ${weapons[i].price}</p>
                     <div class="card-actions w-full mt-2 flex-col gap-2">
-                        <button id="weapon-${i}-purchase" class="btn btn-sm btn-warning w-full" onClick="buyG(${i});">Purchase</button>
-                        <button id="weapon-${i}-equip" class="btn btn-sm btn-neutral w-full" onClick="useW(${i});">Equip</button>
+                        <button id="weapon-${i}-purchase" class="btn btn-sm btn-warning w-full rounded-sm" onClick="buyG(${i});">Purchase</button>
+                        <button id="weapon-${i}-equip" class="btn btn-sm btn-neutral w-full rounded-sm" onClick="useW(${i});">Equip</button>
                     </div>
                 </div>
             </div>
@@ -407,16 +414,16 @@ function UpdateWeapons() {
 		document.getElementById("weapon-" + i + "-price").innerHTML = `R ${COST} <br><small style="color: #db2828;"><i class="fa-thin fa-crosshairs-simple"></i> ${powerVal}</small>`;
 		
 		const canBuy = p.cash >= (p.WeaponBought[i] < 1 ? weapons[i].price : weapons[i].price * 1.25);
-		let purchaseBtnClass = canBuy ? "btn btn-sm btn-warning w-full" : "btn btn-sm btn-error btn-outline w-full btn-disabled";
-		if (p.Stars[i] === 10 && p.WeaponBought[i] > 0) purchaseBtnClass = "btn btn-sm btn-warning btn-outline w-full btn-disabled";
+		let purchaseBtnClass = canBuy ? "btn btn-sm btn-warning w-full rounded-sm" : "btn btn-sm btn-error btn-outline w-full btn-disabled rounded-sm";
+		if (p.Stars[i] === 10 && p.WeaponBought[i] > 0) purchaseBtnClass = "btn btn-sm btn-warning btn-outline w-full btn-disabled rounded-sm";
 		let purchaseText = p.WeaponBought[i] > 0 ? "Roll" : "Buy";
 		if (p.Stars[i] === 10 && p.WeaponBought[i] > 0) purchaseText = "Maxed";
 		const purchaseBtn = document.getElementById("weapon-" + i + "-purchase"); purchaseBtn.className = purchaseBtnClass; purchaseBtn.innerHTML = purchaseText;
 		
-		let equipBtnClass = p.WeaponBought[i] > 0 ? "btn btn-sm btn-neutral w-full" : "btn btn-sm btn-neutral w-full btn-disabled";
+		let equipBtnClass = p.WeaponBought[i] > 0 ? "btn btn-sm btn-neutral w-full rounded-sm" : "btn btn-sm btn-neutral w-full btn-disabled rounded-sm";
 		let equipText = "Equip";
 		if (p.Weapon.Id == i) {
-			equipBtnClass = "btn btn-sm btn-success w-full btn-disabled";
+			equipBtnClass = "btn btn-sm btn-success w-full btn-disabled rounded-sm";
 			equipText = "Equipped";
 		}
 		const equipBtn = document.getElementById("weapon-" + i + "-equip"); equipBtn.className = equipBtnClass; equipBtn.innerHTML = equipText;

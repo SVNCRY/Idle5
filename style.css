@@ -95,14 +95,8 @@
     font-weight: 900;
 }
 
-#body,
-.bg-base-100 {
-    font-family: 'Quicksand', sans-serif !important;
-    font-display: swap;
-    background: center / cover no-repeat url(images/bg.webp) !important;
-    background-attachment: fixed;
+body {
     cursor: url("images/normal.cur"), pointer;
-    font-size: 17px;
 }
 
 #imagecontainer {
@@ -227,15 +221,15 @@ a,
 
 body ::-webkit-scrollbar-thumb {
     border-radius: 0;
-    background: linear-gradient(to right, rgb(108, 184, 124), rgb(96, 199, 118));
+    background: #374151;
 }
 
 body ::-webkit-scrollbar-thumb:hover {
-    background: rgb(108, 184, 124);
+    background: #4b5563;
 }
 
 body ::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.7);
+    background: #111722;
 }
 
 .bold {

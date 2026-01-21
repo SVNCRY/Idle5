@@ -4,268 +4,330 @@
     <title>Mzazsi Crime Idle is loading..</title>
     <meta charset="UTF-8" name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' />
     <link rel="shortcut icon" type="image/x-icon" href="images/fav.ico" />
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Saira:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://site-assets.fontawesome.com" crossorigin>
     <link rel="stylesheet" type="text/css" href="https://site-assets.fontawesome.com/releases/v7.1.0/css/all.css">
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@latest/dist/full.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    
+    <!-- Tailwind CSS & DaisyUI via CDN (No build step required) -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-      tailwind.config = {
-        daisyui: {
-          themes: ["dark", "luxury", "business"],
-        },
-      }
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'immo': '#111722',
+                        'immo-surface': '#151b2b',
+                        'immo-card': '#191f2c',
+                        'immo-lighter': '#1c212c',
+                        'quality-standard-text': '#d1d5db',
+                        'quality-standard-border': '#37415166',
+                        'quality-standard-background': '#161d2a',
+                        'quality-refined-text': '#4d76d6',
+                        'quality-refined-border': '#4d76d64d',
+                        'quality-refined-background': '#152951',
+                        'quality-premium-text': '#1fd60b',
+                        'quality-premium-border': '#1fd60b4d',
+                        'quality-premium-background': '#16382b',
+                        'quality-epic-text': '#c0392b',
+                        'quality-epic-border': '#c0392b4d',
+                        'quality-epic-background': '#421d25',
+                        'quality-legendary-text': '#f7bd1e',
+                        'quality-legendary-border': '#f7bd1e4d',
+                        'quality-legendary-background': '#3d3222',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        float: 'float 6s ease-in-out infinite',
+                    }
+                },
+            },
+            daisyui: {
+                themes: [
+                    {
+                        mzansi: {
+                            "primary": "#4f46e5",
+                            "secondary": "#eab308",
+                            "accent": "#22c55e",
+                            "neutral": "#111827",
+                            "base-100": "#111722",
+                            "base-200": "#191f2c",
+                            "base-300": "#374151",
+                        },
+                    },
+                    "dark",
+                ],
+            },
+        }
     </script>
-    <link rel="stylesheet" type="text/css" href="style.css" />
     <style>
-        /* Custom Scrollbar for Webkit */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #1a1a1a; }
-        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #555; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        /* Markdown styles */
+        .markdown { color: #9ca3af; line-height: 2; }
+        .markdown h1, .markdown h2, .markdown h3 { color: #e5e7eb; font-weight: 700; margin: 1rem 0; }
+        .markdown h1 { font-size: 1.5rem; }
+        .markdown h2 { font-size: 1.25rem; }
+        .markdown a { color: #e5e7eb; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 4px; }
+        .markdown a:hover { color: #facc15; }
+        .markdown ul, .markdown ol { padding-left: 2rem; list-style: disc; }
+        .markdown li { color: #d1d5db; }
     </style>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 
-<body id="body" class="select-none bg-base-100 text-base-content overflow-x-hidden">
-    <!--SIDE BAR-->
-    <div id="sidebar" class="hidden md:flex flex-col fixed left-0 top-0 h-full w-24 bg-base-300 z-50 p-2 gap-2 items-center pt-20">
-        <a class="btn btn-ghost btn-circle w-16 h-16 flex flex-col gap-1" id="menu4" data-id="4">
-            <i class="fa-solid fa-info text-xl"></i><span class="text-xs">Guide</span></a>
-        <a class="btn btn-ghost btn-circle w-16 h-16 flex flex-col gap-1" id="menu5" data-id="5">
-            <i class="fa-solid fa-floppy-disk text-xl"></i><span class="text-xs">Save</span></a>
-        <a class="btn btn-ghost btn-circle w-16 h-16 flex flex-col gap-1" target="_blank" href="https://discord.gg/SBuYeHh">
-            <i class="fa-brands fa-discord text-xl"></i><span class="text-xs">Discord</span></a>
-        <a class="btn btn-ghost btn-circle w-16 h-16 flex flex-col gap-1" target="_blank" href="https://github.com/GoldenLys/IdleFive">
-            <i class="fa-brands fa-github text-xl"></i><span class="text-xs">Github</span></a>
-        <a class="btn btn-ghost btn-circle w-16 h-16 flex flex-col gap-1" target="_blank" href="https://www.paypal.me/Aizen45/5">
-            <i class="fa-brands fa-paypal text-xl"></i><span class="text-xs">Donate</span></a>
-    </div>
-    
-    <div class="md:pl-24 min-h-screen flex flex-col" fetchpriority="high">
-        <!--TOP MENU-->
-        <div id="top-menu" class="navbar bg-base-200 shadow-lg sticky top-0 z-40">
-            <div class="flex-1">
-                <a class="btn btn-ghost text-2xl text-success"><i class="fa-duotone fa-solid fa-circle-dollar"></i></a>
+<body data-theme="mzansi" class="select-none overflow-x-hidden bg-base-100 text-base-content">
+    <div x-data="{ menuOpen: false }">
+        <!-- Mobile menu overlay -->
+        <div x-show="menuOpen" @click="menuOpen = false" x-transition:enter="transition-opacity ease-linear duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition-opacity ease-linear duration-300" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="fixed inset-0 bg-gray-900/80 z-40 lg:hidden" style="display:none;"></div>
+
+        <!-- Sidebar -->
+        <aside class="fixed inset-y-0 z-50 flex w-72 flex-col bg-base-200 transition-transform duration-300 ease-in-out left-0 lg:left-0 -translate-x-full lg:translate-x-0" :class="{ '!translate-x-0': menuOpen }">
+            <div class="flex grow flex-col gap-y-5 overflow-y-auto px-6 pb-4">
+                <div class="flex h-16 shrink-0 items-center gap-2">
+                    <i class="fa-duotone fa-solid fa-circle-dollar text-success text-3xl"></i>
+                    <h1 class="text-2xl font-bold">Mzansi Crime</h1>
+                </div>
+                <nav class="flex flex-1 flex-col">
+                    <ul role="list" class="flex flex-1 flex-col gap-y-7" id="game-menu">
+                        <li>
+                            <ul role="list" class="-mx-2 space-y-1">
+                                <li><a data-id="2" class="btn btn-ghost justify-start w-full text-base-content hover:bg-base-300"><i class="fa-solid fa-dollar-sign w-6"></i> Missions</a></li>
+                                <li><a data-id="1" class="btn btn-ghost justify-start w-full text-base-content hover:bg-base-300"><i class="fa-thin fa-crosshairs-simple w-6"></i> Weapons</a></li>
+                                <li><a data-id="3" class="btn btn-ghost justify-start w-full text-base-content hover:bg-base-300"><i class="fa-solid fa-user w-6"></i> Character</a></li>
+                                <li><a data-id="4" class="btn btn-ghost justify-start w-full text-base-content hover:bg-base-300"><i class="fa-solid fa-chart-bar w-6"></i> Stats</a></li>
+                                <li><a data-id="5" class="btn btn-ghost justify-start w-full text-base-content hover:bg-base-300"><i class="fa-sharp fa-solid fa-award w-6"></i> Achievements</a></li>
+                            </ul>
+                        </li>
+                        <li class="mt-auto">
+                            <a data-id="0" class="btn btn-ghost justify-start w-full text-base-content hover:bg-base-300"><i class="fa-solid fa-bars w-6"></i> Menu</a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
-            <div class="flex-none hidden md:flex gap-2" id="game-menu">
-                <button id="t0" class="btn btn-sm btn-ghost">
-                    <i class="fa-solid fa-bars"></i> Menu</button>
-                <a class="btn btn-sm btn-ghost" id="t1" data-id="1">
-                    <i class="fa-thin fa-crosshairs-simple icon"></i>Weapons</a>
-                <a class="btn btn-sm btn-outline btn-success" id="t2" data-id="2">
-                    <i class="dollar sign icon"></i>Missions</a>
-                <a class="btn btn-sm btn-ghost" id="t3" data-id="3">
-                    <i class="user icon"></i>Character</a>
-                <a class="btn btn-sm btn-ghost" id="t4" data-id="4">
-                    <i class="chart bar icon"></i>Stats</a>
-                <a class="btn btn-sm btn-ghost" id="t5" data-id="5">
-                    <i class="fa-sharp fa-solid fa-award icon"></i>Achievements</a>
-            </div>
-        </div>
-        <!-- MOBILE BOTTOM NAV -->
-        <div id="mobile-bottom-nav" class="btm-nav md:hidden z-50 bg-base-200 border-t border-base-300">
-            <button class="text-neutral-content" data-id="1"><i class="fa-thin fa-crosshairs-simple text-xl"></i><span class="btm-nav-label text-xs">Weapons</span></button>
-            <button class="active text-success bg-base-300" data-id="2"><i class="fa-solid fa-dollar-sign text-xl"></i><span class="btm-nav-label text-xs">Missions</span></button>
-            <button class="text-neutral-content" data-id="3"><i class="fa-solid fa-user text-xl"></i><span class="btm-nav-label text-xs">Char</span></button>
-            <button class="text-neutral-content" data-id="4"><i class="fa-solid fa-chart-bar text-xl"></i><span class="btm-nav-label text-xs">Stats</span></button>
-            <button class="text-neutral-content" data-id="0"><i class="fa-solid fa-bars text-xl"></i><span class="btm-nav-label text-xs">Menu</span></button>
-        </div>
+        </aside>
 
-        <!--COLUMNS-->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 p-4 pb-20 md:pb-4">
-            <!--LEFT COLUMN-->
-            <div class="lg:col-span-1 flex flex-col gap-4" id="colonne-m">
-                <!--CURRENT WEAPON-->
-                <div class="card bg-base-200 shadow-xl">
-                    <div class="card-body items-center text-center p-4">
-                        <h2 class="text-4xl font-bold text-success" id="status_cash"></h2>
-                        <div id="imagecontainer" class="mt-2">
-                            <div id="imagecash"></div>
+        <!-- Mobile menu button -->
+        <button @click="menuOpen = true" class="fixed z-30 lg:hidden p-3 bg-base-300 border border-gray-700/40 rounded-full text-gray-400 hover:text-white hover:bg-gray-800 transition-colors shadow-lg top-4 left-4">
+            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+        </button>
+
+        <main class="lg:pl-72">
+            <!-- Top bar for currencies -->
+            <div class="sticky top-0 z-30 flex h-16 shrink-0 items-center gap-x-4 border-b border-base-300 bg-base-100 px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8">
+                <div class="flex flex-1 gap-x-4 self-stretch lg:gap-x-6 justify-end">
+                    <div class="flex items-center gap-x-4 lg:gap-x-6">
+                        <div class="flex items-center px-4 py-2 text-sm font-bold bg-base-200 rounded-full whitespace-nowrap">
+                            <span class="flex-shrink-0 mr-2 text-success"><i class="fa-duotone fa-solid fa-circle-dollar"></i></span>
+                            <span id="status_cash">0</span>
                         </div>
-                    </div>
-                </div>
-
-                <!--GAME INFOS-->
-                <div class="card bg-base-200 shadow-xl p-4">
-                    <div id="status" class="grid grid-cols-4 gap-2 text-sm mb-4">
-                        <div class="font-bold text-neutral-content">Weapon</div>
-                        <div class="col-span-3 text-right font-bold" id="status_weapon"></div>
-                        
-                        <div class="font-bold text-error">Damage</div>
-                        <div class="col-span-3 text-right font-bold" id="status_damage"></div>
-                        
-                        <div class="font-bold text-info">Rank</div>
-                        <div class="col-span-3 text-right" id="status_level"></div>
-                        
-                        <div class="font-bold text-warning">Chips</div>
-                        <div class="col-span-3 text-right" id="status_points"></div>
-                    </div>
-
-                    <div class="divider font-bold text-lg">Current Objective</div>
-
-                    <div class="flex flex-col gap-2 text-center">
-                        <span id="objective" class="text-lg"></span>
-                        <h3 class="text-warning font-bold" id="quest_rewards"></h3>
-                        <button id="ChangeObjective" class="btn btn-outline btn-success w-full mt-2">
-                            New objective for <span class="text-warning ml-1"><i class='fa-light fa-coin'></i> 0.5</span>
-                        </button>
-                    </div>
-                    
-                    <div class="divider"></div>
-                    <div class="text-center">
-                        <div id="messages"></div>
-                    </div>
-
-                </div>
-            </div>
-            <!--RIGHT COLUMN-->
-            <div class="lg:col-span-2" id="colonne-d">
-                <!--WEAPONS-->
-                <div id="tab1" style="display: none; width: 100%;">
-
-                    <div name="weap-type" class="tabs tabs-boxed justify-center mb-4 bg-base-200" id="weap-select">
-                        <a id="W1" class="tab tab-active" data-id="1"></a>
-                        <a id="W2" class="tab" data-id="2"></a>
-                        <a id="W3" class="tab" data-id="3"></a>
-                        <a id="W4" class="tab" data-id="4"></a>
-                        <a id="W5" class="tab" data-id="5"></a>
-                        <a id="W6" class="tab" data-id="6"></a>
-                        <a id="W7" class="tab" data-id="7"></a>
-                        <a id="W8" class="tab" data-id="8"></a>
-                    </div>
-
-                    <div id="Wtab1" class="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
-                    <div id="Wtab2" class="grid grid-cols-1 sm:grid-cols-2 gap-4" style="display: none;"></div>
-                    <div id="Wtab3" class="grid grid-cols-1 sm:grid-cols-2 gap-4" style="display: none;"></div>
-                    <div id="Wtab4" class="grid grid-cols-1 sm:grid-cols-2 gap-4" style="display: none;"></div>
-                    <div id="Wtab5" class="grid grid-cols-1 sm:grid-cols-2 gap-4" style="display: none;"></div>
-                    <div id="Wtab6" class="grid grid-cols-1 sm:grid-cols-2 gap-4" style="display: none;"></div>
-                    <div id="Wtab7" class="grid grid-cols-1 sm:grid-cols-2 gap-4" style="display: none;"></div>
-                    <div id="Wtab8" class="grid grid-cols-1 sm:grid-cols-2 gap-4" style="display: none;"></div>
-                </div>
-
-                <!--MISSIONS-->
-                <div id="tab2" style="display: block; width: 100%;">
-                    <div id="missions" class="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
-                </div>
-
-                <!--VEHICLES-->
-                <div id="tab3" style="display: none; width: 100%;">
-
-                    <div class="card bg-base-200 shadow-xl p-4 mb-4">
-                        <div class="flex flex-col gap-2">
-                            <div id="character-number"></div>
-                            <div id="prestigecount"></div>
-                            <div id="character-text1"></div>
-                            <div id="prestigepricecount"></div>
-                            <div id="character-text2"></div>
-                            <div class="tc-dollar" id="prestigepricecount2"></div>
-                            <div id="character-text3"></div>
-                            <div id="character-text4"></div>
-                            <div id="character-text5"></div>
+                         <div class="flex items-center px-4 py-2 text-sm font-bold bg-base-200 rounded-full whitespace-nowrap">
+                            <span class="flex-shrink-0 mr-2 text-warning"><i class='fa-light fa-coin'></i></span>
+                            <span id="status_points">0</span>
                         </div>
-                    </div>
-                    <div class="card bg-base-200 shadow-xl p-4 mb-4">
-                        <div class="flex gap-4 justify-center">
-                            <div id="btnReasign" onClick="ReasignPoints();" class="btn btn-info">Reasign Points </div>
-                            <div id="btnPrestige" onClick="AddPrestige();" class="btn btn-success btn-outline">
-                            <i class="checkmark icon"></i>Change Character
-                            </div>
-                        </div>
-                    </div>
-
-                    <table id="Vtab" class="table w-full"></table>
-                </div>
-
-                <!--STATS-->
-                <div id="tab4" style="display: none; width: 100%;">
-                    <div class="card bg-base-200 shadow-xl p-4">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                                <div class="divider font-bold text-sm">GENERAL</div>
-                                <div class="flex flex-col gap-1">
-                                    <div id="ObjectivesCompleted"></div>
-                                    <div id="totalclicks"></div>
-                                    <div id="highestrank"></div>
-                                    <div id="totalsuccess"></div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="divider font-bold text-sm">CHARACTER</div>
-                                <div class="flex flex-col gap-1">
-                                    <div id="spcount"></div>
-                                    <div id="pointsspent"></div>
-                                    <div id="boughtvehicles1"></div>
-                                    <div id="boughtvehicles2"></div>
-                                    <div id="boughtvehicles3"></div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="divider font-bold text-sm">WEAPONS</div>
-                                <div class="flex flex-col gap-1">
-                                    <div id="lowestweaponrank"></div>
-                                    <div id="highestweaponrank"></div>
-                                    <div id="weapons-bought"></div>
-                                    <div id="totalweaponsbought"></div>
-                                    <div id="totalweaponrerolled"></div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="divider font-bold text-sm">CASH</div>
-                                <div class="flex flex-col gap-1">
-                                    <div id="cashcount"></div>
-                                    <div id="cashpscount"></div>
-                                    <div id="addcashcount"></div>
-                                    <div id="character_totalspentcash"></div>
-                                    <div id="character_totalcash"></div>
-                                    <div id="totalspentcash"></div>
-                                    <div id="totalcash"></div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="divider font-bold text-sm">MULTIPLIERS</div>
-                                <div class="flex flex-col gap-1">
-                                    <div id="cashmult"></div>
-                                    <div id="damagemult"></div>
-                                    <div id="stealthmult"></div>
-                                    <div id="prestigemult"></div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="divider font-bold text-sm">INFOS</div>
-                                <div class="flex flex-col gap-1">
-                                    <div id="time"></div>
-                                    <div id="version"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!--ACHIEVEMENTS-->
-                <div id="tab5" style="display: none; width: 100%;">
-                    <div class="card bg-base-200 shadow-xl p-4">
-                        <div id="successtype" class="tabs tabs-boxed justify-center mb-4 bg-base-300">
-                            <button id="succcess-btn-0" data-id="0" class="tab tab-active">Player</button>
-                            <button id="succcess-btn-1" data-id="1" class="tab">Cash</button>
-                            <button id="succcess-btn-2" data-id="2" class="tab">Missions</button>
-                            <button id="succcess-btn-3" data-id="3" class="tab">Characters</button>
-                        </div>
-
-                        <div id="Stab0" style="display: block;"></div>
-                        <div id="Stab1" style="display: none;"></div>
-                        <div id="Stab2" style="display: none;"></div>
-                        <div id="Stab3" style="display: none;"></div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div id="announce" class="alert alert-info fixed bottom-4 right-4 w-auto shadow-lg z-50" style="display: none;">
-            <div id="announce-text"></div>
-        </div>
+
+            <div class="p-4 sm:p-6 lg:p-8">
+                <!--COLUMNS-->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!--LEFT COLUMN-->
+                    <div class="lg:col-span-1 flex flex-col gap-4" id="colonne-m">
+                        <!--CURRENT WEAPON-->
+                        <div class="card bg-base-200 shadow-xl">
+                            <div class="card-body items-center text-center p-4">
+                                <div id="imagecontainer" class="mt-2">
+                                    <div id="imagecash"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--GAME INFOS-->
+                        <div class="card bg-base-200 shadow-xl p-4">
+                            <div id="status" class="grid grid-cols-4 gap-2 text-sm mb-4">
+                                <div class="font-bold text-neutral-content">Weapon</div>
+                                <div class="col-span-3 text-right font-bold" id="status_weapon"></div>
+                                
+                                <div class="font-bold text-error">Damage</div>
+                                <div class="col-span-3 text-right font-bold" id="status_damage"></div>
+                                
+                                <div class="font-bold text-info">Rank</div>
+                                <div class="col-span-3 text-right" id="status_level"></div>
+                            </div>
+
+                            <div class="divider font-bold text-lg">Current Objective</div>
+
+                            <div class="flex flex-col gap-2 text-center">
+                                <span id="objective" class="text-lg"></span>
+                                <h3 class="text-warning font-bold" id="quest_rewards"></h3>
+                                <button id="ChangeObjective" class="btn btn-outline btn-success w-full mt-2">
+                                    New objective for <span class="text-warning ml-1"><i class='fa-light fa-coin'></i> 0.5</span>
+                                </button>
+                            </div>
+                            
+                            <div class="divider"></div>
+                            <div class="text-center">
+                                <div id="messages"></div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--RIGHT COLUMN-->
+                    <div class="lg:col-span-2" id="colonne-d">
+                        <!--WEAPONS-->
+                        <div id="tab1" style="display: none; width: 100%;">
+
+                            <div name="weap-type" class="tabs tabs-boxed justify-center mb-4 bg-base-200" id="weap-select">
+                                <a id="W1" class="tab tab-active" data-id="1"></a>
+                                <a id="W2" class="tab" data-id="2"></a>
+                                <a id="W3" class="tab" data-id="3"></a>
+                                <a id="W4" class="tab" data-id="4"></a>
+                                <a id="W5" class="tab" data-id="5"></a>
+                                <a id="W6" class="tab" data-id="6"></a>
+                                <a id="W7" class="tab" data-id="7"></a>
+                                <a id="W8" class="tab" data-id="8"></a>
+                            </div>
+
+                            <div id="Wtab1" class="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
+                            <div id="Wtab2" class="grid grid-cols-1 sm:grid-cols-2 gap-4" style="display: none;"></div>
+                            <div id="Wtab3" class="grid grid-cols-1 sm:grid-cols-2 gap-4" style="display: none;"></div>
+                            <div id="Wtab4" class="grid grid-cols-1 sm:grid-cols-2 gap-4" style="display: none;"></div>
+                            <div id="Wtab5" class="grid grid-cols-1 sm:grid-cols-2 gap-4" style="display: none;"></div>
+                            <div id="Wtab6" class="grid grid-cols-1 sm:grid-cols-2 gap-4" style="display: none;"></div>
+                            <div id="Wtab7" class="grid grid-cols-1 sm:grid-cols-2 gap-4" style="display: none;"></div>
+                            <div id="Wtab8" class="grid grid-cols-1 sm:grid-cols-2 gap-4" style="display: none;"></div>
+                        </div>
+
+                        <!--MISSIONS-->
+                        <div id="tab2" style="display: block; width: 100%;">
+                            <div id="missions" class="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
+                        </div>
+
+                        <!--VEHICLES-->
+                        <div id="tab3" style="display: none; width: 100%;">
+
+                            <div class="card bg-base-200 shadow-xl p-4 mb-4">
+                                <div class="flex flex-col gap-2">
+                                    <div id="character-number"></div>
+                                    <div id="prestigecount"></div>
+                                    <div id="character-text1"></div>
+                                    <div id="prestigepricecount"></div>
+                                    <div id="character-text2"></div>
+                                    <div class="tc-dollar" id="prestigepricecount2"></div>
+                                    <div id="character-text3"></div>
+                                    <div id="character-text4"></div>
+                                    <div id="character-text5"></div>
+                                </div>
+                            </div>
+                            <div class="card bg-base-200 shadow-xl p-4 mb-4">
+                                <div class="flex gap-4 justify-center">
+                                    <div id="btnReasign" onClick="ReasignPoints();" class="btn btn-info">Reasign Points </div>
+                                    <div id="btnPrestige" onClick="AddPrestige();" class="btn btn-success btn-outline">
+                                    <i class="checkmark icon"></i>Change Character
+                                    </div>
+                                </div>
+                            </div>
+
+                            <table id="Vtab" class="table w-full"></table>
+                        </div>
+
+                        <!--STATS-->
+                        <div id="tab4" style="display: none; width: 100%;">
+                            <div class="card bg-base-200 shadow-xl p-4">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div>
+                                        <div class="divider font-bold text-sm">GENERAL</div>
+                                        <div class="flex flex-col gap-1">
+                                            <div id="ObjectivesCompleted"></div>
+                                            <div id="totalclicks"></div>
+                                            <div id="highestrank"></div>
+                                            <div id="totalsuccess"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="divider font-bold text-sm">CHARACTER</div>
+                                        <div class="flex flex-col gap-1">
+                                            <div id="spcount"></div>
+                                            <div id="pointsspent"></div>
+                                            <div id="boughtvehicles1"></div>
+                                            <div id="boughtvehicles2"></div>
+                                            <div id="boughtvehicles3"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="divider font-bold text-sm">WEAPONS</div>
+                                        <div class="flex flex-col gap-1">
+                                            <div id="lowestweaponrank"></div>
+                                            <div id="highestweaponrank"></div>
+                                            <div id="weapons-bought"></div>
+                                            <div id="totalweaponsbought"></div>
+                                            <div id="totalweaponrerolled"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="divider font-bold text-sm">CASH</div>
+                                        <div class="flex flex-col gap-1">
+                                            <div id="cashcount"></div>
+                                            <div id="cashpscount"></div>
+                                            <div id="addcashcount"></div>
+                                            <div id="character_totalspentcash"></div>
+                                            <div id="character_totalcash"></div>
+                                            <div id="totalspentcash"></div>
+                                            <div id="totalcash"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="divider font-bold text-sm">MULTIPLIERS</div>
+                                        <div class="flex flex-col gap-1">
+                                            <div id="cashmult"></div>
+                                            <div id="damagemult"></div>
+                                            <div id="stealthmult"></div>
+                                            <div id="prestigemult"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="divider font-bold text-sm">INFOS</div>
+                                        <div class="flex flex-col gap-1">
+                                            <div id="time"></div>
+                                            <div id="version"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--ACHIEVEMENTS-->
+                        <div id="tab5" style="display: none; width: 100%;">
+                            <div class="card bg-base-200 shadow-xl p-4">
+                                <div id="successtype" class="tabs tabs-boxed justify-center mb-4 bg-base-300">
+                                    <button id="succcess-btn-0" data-id="0" class="tab tab-active">Player</button>
+                                    <button id="succcess-btn-1" data-id="1" class="tab">Cash</button>
+                                    <button id="succcess-btn-2" data-id="2" class="tab">Missions</button>
+                                    <button id="succcess-btn-3" data-id="3" class="tab">Characters</button>
+                                </div>
+
+                                <div id="Stab0" style="display: block;"></div>
+                                <div id="Stab1" style="display: none;"></div>
+                                <div id="Stab2" style="display: none;"></div>
+                                <div id="Stab3" style="display: none;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="announce" class="alert alert-info fixed bottom-4 right-4 w-auto shadow-lg z-50" style="display: none;">
+                <div id="announce-text"></div>
+            </div>
+        </main>
     </div>
     <!--MENUS-->
     <dialog id="modal-1" class="modal">

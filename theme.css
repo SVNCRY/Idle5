@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html {
+        font-family: 'Inter', sans-serif;
+    }
+    
+    body {
+        @apply bg-immo text-gray-200 antialiased;
+    }
+}
+
+/* Markdown styles from idle-mmo.com */
+@layer components {
+    .markdown {
+        @apply text-gray-400 leading-loose;
+    }
+    .markdown h1, .markdown h2, .markdown h3, .markdown h4, .markdown h5, .markdown h6 {
+        @apply text-gray-200;
+    }
+    .markdown h1 { @apply text-2xl md:text-4xl font-bold my-4; }
+    .markdown h2 { @apply text-xl md:text-3xl font-bold my-4; }
+    .markdown h3 { @apply text-lg md:text-2xl font-bold my-4; }
+    .markdown a {
+        @apply text-gray-200 font-medium underline decoration-dotted decoration-1 underline-offset-4;
+    }
+    .markdown a:hover {
+        @apply text-yellow-400;
+    }
+    .markdown strong {
+        @apply text-gray-200;
+    }
+    .markdown ul {
+        @apply list-disc pl-8;
+    }
+    .markdown ol {
+        @apply list-decimal pl-8;
+    }
+    .markdown li {
+        @apply py-0.5 pl-3 font-medium text-gray-300;
+    }
+    .markdown p:not(:first-of-type) {
+        @apply my-2;
+    }
+}

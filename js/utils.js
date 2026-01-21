@@ -154,6 +154,11 @@ function toHHMMSS(id) {
 	return time;
 }
 
+// UI Helpers (Compatibility with new UI theme)
+function numberShorten(value, decimals = 2) { return formatBigNumberAbbrev(value, decimals); }
+function number_format(value) { return numeral(value).format("0,0"); }
+function msToDaysHoursMinutesAndSecondsShort(ms) { return toHHMMSS(Math.floor(ms / 1000)); }
+
 // Save and load functions
 let canSave = 1;
 

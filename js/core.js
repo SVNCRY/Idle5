@@ -614,7 +614,7 @@ function GenStarLabel(Stars) {
 	if (Stars == 8) Class = "Divine";
 	if (Stars == 9) Class = "Universal";
 	if (Stars == 10) Class = "Dimensional";
-	if (Stars != 0) return "<div class='badge badge-outline " + Class + "'> " + Stars + " <i class='fitted star icon'></i></div>";
+	if (Stars != 0) return "<div class='badge badge-outline rounded-sm font-mono " + Class + "'> " + Stars + " <i class='fitted star icon'></i></div>";
 	else return "";
 }
 
